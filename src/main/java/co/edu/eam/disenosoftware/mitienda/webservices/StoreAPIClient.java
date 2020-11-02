@@ -5,6 +5,10 @@ import co.edu.eam.disenosoftware.mitienda.model.requests.StoreLoginRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Category;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import java.util.List;
 
 /**
  * Store api client
@@ -24,4 +28,12 @@ public interface StoreAPIClient {
   @POST(STORES_URL + "login")
   Call<Store> storeLogin(@Body StoreLoginRequest storeLoginRequest);
 
+  /**
+   * Store Categories - Web Services
+   * @param id of a store
+   * @return List of categories
+   */
+
+  @GET(STORE_URL+ "{storeId}/categories")
+  Call<List<Category>> getCategoriesByStoreId(@Path("storeId") Long storeId);
 }
