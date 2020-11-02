@@ -31,21 +31,4 @@ public class OrderProductRepository {
       throw APIErrorHandler.throwApiException(response);
     }
   }
-
-  public static void main(String[] args){
-    OrderProductRepository repo = new OrderProductRepository();
-    try {
-      repo.deleteOrderProductById(127L);
-
-    } catch (APIException e) {
-      System.out.println(e.getMessage());
-      System.out.println(e.getStatus());
-      System.out.println(e.getErrorCode());
-      e.printStackTrace();
-
-    }catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
 }
