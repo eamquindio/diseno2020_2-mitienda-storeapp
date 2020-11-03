@@ -16,13 +16,19 @@ import java.io.IOException;
  */
 public class StoresRepository {
 
+  /**
+   * Store Login Repository
+   * @param body email and password
+   * @return Logged store
+   * @throws IOException IOException
+   */
   public Store storeLogin(StoreLoginRequest body) throws IOException {
     StoreAPIClient storeAPIClient = RetroFitUtils.buildAPIClient(StoreAPIClient.class);
 
     Call<Store> storeRequest = storeAPIClient.storeLogin(body);
     Response<Store> storeResponse = storeRequest.execute();
 
-    if(storeResponse.isSuccessful()) {
+    if (storeResponse.isSuccessful()) {
       return storeResponse.body();
     } else {
       throw APIErrorHandler.throwApiException(storeResponse);
