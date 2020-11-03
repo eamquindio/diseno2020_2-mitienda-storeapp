@@ -13,6 +13,7 @@ import java.io.IOException;
  */
 public class OrdersRepository {
 
+<<<<<<< HEAD
   public void endOrder(Long orderId) throws IOException {
 
     OrderAPIClient apiClient = RetroFitUtils.buildAPIClient(OrderAPIClient.class);
@@ -28,6 +29,13 @@ public class OrdersRepository {
 
   }
 
+=======
+  /**
+   * Function to use the deliverOrder controller
+   * @param id , id
+   * @throws  IOException , throws exception if response is not successful
+   */
+>>>>>>> f9d90f2 (Adding comments)
   public void deliverOrder(Long id) throws IOException {
     OrderAPIClient orderApiClient = RetroFitUtils.buildAPIClient(OrderAPIClient.class);
     Call<Void> request = orderApiClient.deliverOrder(id);
