@@ -65,12 +65,12 @@ public class Store implements Serializable {
 
   /**
    * Constructor
-   * @param name
-   * @param owner
-   * @param address
-   * @param phone
-   * @param email
-   * @param password
+   * @param name Store's name
+   * @param owner Store's owner
+   * @param address Store's address
+   * @param phone Store's phone
+   * @param email Store's email
+   * @param password Store's password
    */
   public Store(String name, String owner, String address, String phone, String email, String password) {
     this.name = name;
