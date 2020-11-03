@@ -30,10 +30,10 @@ public interface StoreAPIClient {
 
   /**
    * Store Categories - Web Services
-   * @param id of a store
+   * @param storeId of a store
    * @return List of categories
    */
 
-  @GET(STORE_URL+ "{storeId}/categories")
+  @GET(STORES_URL+ "{storeId}/categories")
   Call<List<Category>> getCategoriesByStoreId(@Path("storeId") Long storeId);
 }
