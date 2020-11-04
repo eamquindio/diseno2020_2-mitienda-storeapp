@@ -1,10 +1,21 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
+<<<<<<< HEAD
 import co.edu.eam.disenosoftware.mitienda.util.APIErrorHandler;
 import co.edu.eam.disenosoftware.mitienda.util.RetroFitUtils;
 import co.edu.eam.disenosoftware.mitienda.webservices.OrderProductAPIClient;
 import retrofit2.Call;
 import retrofit2.Response;
+=======
+
+import co.edu.eam.disenosoftware.mitienda.util.APIErrorHandler;
+import co.edu.eam.disenosoftware.mitienda.util.RetroFitUtils;
+
+import co.edu.eam.disenosoftware.mitienda.webservices.OrderProductAPIClient;
+import retrofit2.Call;
+import retrofit2.Response;
+
+>>>>>>> e040d10 (Arreglando problemas)
 
 import java.io.IOException;
 
@@ -13,6 +24,7 @@ import java.io.IOException;
  */
 public class OrderProductRepository {
 
+<<<<<<< HEAD
   public void deleteOrderProductById (Long orderProductId) throws  IOException{
     //crear el cliente del api - crear quien hace el requst
     OrderProductAPIClient apiClient = RetroFitUtils.buildAPIClient(OrderProductAPIClient.class);
@@ -27,15 +39,15 @@ public class OrderProductRepository {
     }
   }
     public OrderProduct checkProduct(Long id) throws IOException {
+=======
+    public void checkProduct(Long id) throws IOException {
+>>>>>>> e040d10 (Arreglando problemas)
         OrderProductAPIClient orderProductAPIClient = RetroFitUtils.buildAPIClient(OrderProductAPIClient.class);
-        Call<OrderProduct> request = orderProductAPIClient.checkProduct(id);
-        Response <OrderProduct> response = request.execute();
+        Call<Void> request = orderProductAPIClient.checkProduct(id);
+        Response<Void> response = request.execute();
 
-        if(response.isSuccessful()){
-            return response.body();
-        }else{
+        if (!response.isSuccessful()) {
             throw APIErrorHandler.throwApiException(response);
         }
     }
 }
-

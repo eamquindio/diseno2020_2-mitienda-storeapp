@@ -22,6 +22,6 @@ public interface OrderProductAPIClient {
     public static final String ORDERPRODUCT_URL ="/api/order-products";
 
     @PUT(ORDERPRODUCT_URL + "/{orderProductId}/check-product")
-    Call<OrderProduct> checkProduct(@Path("orderProductId") Long orderProductId);
+    Call<Void> checkProduct(@Path("orderProductId") Long orderProductId);
 
 }
