@@ -3,21 +3,72 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.eam.disenosoftware.mitienda.gui;
+package co.edu.eam.disenosoftware.mitienda.gui.pages;
 
-import co.edu.eam.disenosoftware.mitienda.util.GroceryFrame;
+import co.edu.eam.disenosoftware.mitienda.gui.lib.ListView;
+import co.edu.eam.disenosoftware.mitienda.gui.lib.Page;
+
+import javax.swing.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
  * @author caferrerb
  */
-public class History extends GroceryFrame {
+public class Home extends Page {
 
     /**
-     * Creates new form History
+     * Creates new form Home
      */
-    public History() {
+    public Home() {
         super();
+    }
+
+    @Override
+    public JComponent buildContent() {
+
+        List<JComponent> list = Arrays.asList(
+                new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres"),  new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres"),  new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres"),  new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres"),
+                new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres"),  new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres"),  new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres"),  new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres"),
+                new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres"),  new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres"),  new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres"),  new JLabel("uno"),
+                new JButton("dos"),
+                new JTextField("tres")
+        );
+
+        return new ListView<JComponent>(list);
+    }
+
+    @Override
+    public JComponent buildHeader() {
+        return new JLabel("Home");
+    }
+
+    @Override
+    public JComponent buildFooter() {
+        return new JTextField("aja");
     }
 
     /**
@@ -35,11 +86,11 @@ public class History extends GroceryFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 501, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();
@@ -62,20 +113,20 @@ public class History extends GroceryFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new History().setVisible(true);
+                new Home().setVisible(true);
             }
         });
     }

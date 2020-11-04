@@ -3,21 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.eam.disenosoftware.mitienda.util;
+package co.edu.eam.disenosoftware.mitienda.gui.lib;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  * Base frame
  * @author caferrerb
  */
-public class GroceryFrame extends JFrame {
-    
-    
-    public static double WIDTH = 1242.0;
-    public static double HEIGHT = 2688.0;
+public abstract class Page extends JFrame {
+    public static double WIDTH = 500;
+    public static double HEIGHT = 1000;
     
     public static double D_HEIGHT = 700.0;
 
@@ -28,8 +26,6 @@ public class GroceryFrame extends JFrame {
     private javax.swing.JMenuItem menuHistory;
     private javax.swing.JMenuItem menuBack;
 
- 
-    
     /**
      * params to send to gui
      */
@@ -38,17 +34,9 @@ public class GroceryFrame extends JFrame {
     /**
      * Constructor 
      */
-    public GroceryFrame() {
+    public Page() {
         params = new HashMap<>();
-        buildComponents();
-    }
-    
-    
-    /**
-     * Close this frame
-     */
-    public void close() {
-        
+        buildPage();
     }
 
     /**
@@ -58,10 +46,58 @@ public class GroceryFrame extends JFrame {
     public void setParams(Map<String, Object> params) {
         this.params = params;
     }
-    
-    
-      // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void buildComponents() {
+
+    /**
+     * abstract methdo to implement conten of the page
+     * @return component to render in the center of the page
+     */
+    public abstract JComponent buildContent();
+
+    /**
+     * abstract methdo to implement header of the page
+     * @return component to render in the header of the page
+     */
+    public abstract JComponent buildHeader();
+
+    /**
+     * abstract methdo to implement footer of the page
+     * @return component to render in the footer of the page
+     */
+    public abstract JComponent buildFooter();
+
+    /**
+     * Method to build the whole page
+     */
+    private void buildPage() {
+        buildMenu();
+        JComponent content = buildContent();
+        JComponent header  = buildHeader();
+        JComponent footer  = buildFooter();
+
+        double ratio = HEIGHT / D_HEIGHT;
+
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.PAGE_AXIS));
+
+        if(header != null) {
+            getContentPane().add(header);
+        }
+
+        getContentPane().add(content);
+
+        if(footer != null) {
+            getContentPane().add(footer);
+        }
+
+        pack();
+        setSize((int)(WIDTH / ratio), (int)(HEIGHT / ratio));
+        setResizable(false);
+    }
+
+
+    /**
+     * Build the app menu
+     */
+    private void buildMenu() {
 
         menuBar = new javax.swing.JMenuBar();
         menu = new javax.swing.JMenu();
@@ -111,24 +147,6 @@ public class GroceryFrame extends JFrame {
         
         menuBar.add(menu);
         setJMenuBar(menuBar);
-        
-        double ratio = HEIGHT / D_HEIGHT;
-        
-        
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, (int)(WIDTH / ratio), Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, (int)(HEIGHT / ratio), Short.MAX_VALUE)
-        );
-        pack();
-        setResizable(false);
     }
     
        

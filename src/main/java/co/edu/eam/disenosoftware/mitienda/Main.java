@@ -5,6 +5,8 @@
  */
 package co.edu.eam.disenosoftware.mitienda;
 
+import co.edu.eam.disenosoftware.mitienda.gui.lib.Navigator;
+
 /**
  *
  * @author caferrerb
@@ -16,6 +18,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Navigator.goToFrame("Profile");
     }
     
 }
