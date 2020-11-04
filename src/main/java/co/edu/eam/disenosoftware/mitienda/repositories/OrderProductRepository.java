@@ -1,15 +1,10 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
-import co.edu.eam.disenosoftware.mitienda.exceptions.APIException;
-import co.edu.eam.disenosoftware.mitienda.model.responses.ErrorResponse;
 import co.edu.eam.disenosoftware.mitienda.util.APIErrorHandler;
 import co.edu.eam.disenosoftware.mitienda.util.RetroFitUtils;
 import co.edu.eam.disenosoftware.mitienda.webservices.OrderProductAPIClient;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
 
@@ -31,4 +26,16 @@ public class OrderProductRepository {
       throw APIErrorHandler.throwApiException(response);
     }
   }
+    public OrderProduct checkProduct(Long id) throws IOException {
+        OrderProductAPIClient orderProductAPIClient = RetroFitUtils.buildAPIClient(OrderProductAPIClient.class);
+        Call<OrderProduct> request = orderProductAPIClient.checkProduct(id);
+        Response <OrderProduct> response = request.execute();
+
+        if(response.isSuccessful()){
+            return response.body();
+        }else{
+            throw APIErrorHandler.throwApiException(response);
+        }
+    }
 }
+
