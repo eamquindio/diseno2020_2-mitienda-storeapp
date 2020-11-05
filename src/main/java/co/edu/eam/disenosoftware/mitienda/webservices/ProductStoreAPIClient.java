@@ -3,6 +3,7 @@ package co.edu.eam.disenosoftware.mitienda.webservices;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.ProductStore;
 import retrofit2.Call;
+import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 public interface ProductStoreAPIClient {
 
   public static final String PRODUCT_STORE_URL= "api/products-store/";
- Call<List<ProductStore>> getAllProductStoreByStoreId(@Path("storeId")Long storeId);
+
+  @GET(PRODUCT_STORE_URL + "stores/{storeId}/products")
+  Call<List<ProductStore>> getAllProductStoreByStoreId(@Path("storeId")Long storeId);
 
 }
