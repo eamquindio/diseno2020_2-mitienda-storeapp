@@ -5,6 +5,8 @@ import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.Path;
 
+import java.util.List;
+
 /**
  * Orders api web service client
  */
@@ -15,4 +17,6 @@ public interface OrderAPIClient {
   @PATCH(ORDER_URL + "{id}/end")
   Call<Void> endOrder(@Path("id") Long id);
 
+  @GET(ORDER_URL + "{orderId}")
+  Call<List> getOrder(@Path("orderId") Long id);
 }
