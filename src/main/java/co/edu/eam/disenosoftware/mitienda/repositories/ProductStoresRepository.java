@@ -16,22 +16,23 @@ import java.util.List;
  */
 public class ProductStoresRepository {
 
+  /**
+   * get store products
+   * @param storeId
+   * @return
+   * @throws IOException
+   */
   public List<ProductStore> getAllProductStoreByStoreId(Long storeId) throws IOException {
-
     ProductStoreAPIClient apiClient= RetroFitUtils.buildAPIClient(ProductStoreAPIClient.class);
 
     Call<List<ProductStore>> request = apiClient.getAllProductStoreByStoreId(storeId);
     Response<List<ProductStore>> response = request.execute();
 
     if(response.isSuccessful()){
-
       return response.body();
-
     }else{
-
       throw APIErrorHandler.throwApiException(response);
     }
-
   }
 
 }
