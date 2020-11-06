@@ -10,6 +10,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import java.util.List;
 
+import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+
 /**
  * Store api client
  */
@@ -36,4 +38,8 @@ public interface StoreAPIClient {
 
   @GET(STORES_URL+ "{storeId}/categories")
   Call<List<Category>> getCategoriesByStoreId(@Path("storeId") Long storeId);
+  public static final String ORDERS_URL = "/api/stores/";
+
+  @GET(ORDERS_URL +"{store_id}/orders")
+  Call<List<Order>> getOrderByStore(@Path("store_id") Long storeId);
 }
