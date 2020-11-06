@@ -1,6 +1,5 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
-import co.edu.eam.disenosoftware.mitienda.exceptions.APIException;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 import co.edu.eam.disenosoftware.mitienda.model.requests.StoreLoginRequest;
 import co.edu.eam.disenosoftware.mitienda.util.APIErrorHandler;
@@ -18,6 +17,7 @@ public class StoresRepository {
 
   /**
    * Store Login Repository
+   *
    * @param body email and password
    * @return Logged store
    * @throws IOException IOException

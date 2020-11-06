@@ -8,22 +8,21 @@ package co.edu.eam.disenosoftware.mitienda.gui;
 import co.edu.eam.disenosoftware.mitienda.util.Navigator;
 
 /**
- *
  * @author caferrerb
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+  /**
+   * @param args the command line arguments
+   */
+  public static void main(String[] args) {
         /*var splash = new Splash();
         splash.show(5000);
 
         // Initializing...
 
         splash.hideFrame();    */
-        Navigator.goToFrame("Home");
-    }
-    
+    Navigator.goToFrame("Home");
+  }
+
 }

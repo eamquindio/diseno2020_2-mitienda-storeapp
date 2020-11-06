@@ -21,9 +21,9 @@ public class CategoryRepository {
     Call<List<Category>> categoriesRequest = apiClient.getCategoriesByStoreId(storeId);
     Response<List<Category>> response = categoriesRequest.execute();
 
-    if (response.isSuccessful()){
+    if (response.isSuccessful()) {
       return response.body();
-    }else{
+    } else {
       throw APIErrorHandler.throwApiException(response);
     }
   }

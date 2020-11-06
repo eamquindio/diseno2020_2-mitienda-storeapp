@@ -17,7 +17,8 @@ public class StoreLoginRequest {
 
   /**
    * Constructor
-   * @param email email, Store's email
+   *
+   * @param email    email, Store's email
    * @param password password, Store's password
    */
   public StoreLoginRequest(String email, String password) {
@@ -27,6 +28,7 @@ public class StoreLoginRequest {
 
   /**
    * GetEmail
+   *
    * @return Store's email
    */
   public String getEmail() {
@@ -35,6 +37,7 @@ public class StoreLoginRequest {
 
   /**
    * Set Email
+   *
    * @param email Store's email
    */
   public void setEmail(String email) {
@@ -43,6 +46,7 @@ public class StoreLoginRequest {
 
   /**
    * Get password
+   *
    * @return Store's password
    */
   public String getPassword() {
@@ -51,6 +55,7 @@ public class StoreLoginRequest {
 
   /**
    * Set password
+   *
    * @param password Store's password
    */
   public void setPassword(String password) {
