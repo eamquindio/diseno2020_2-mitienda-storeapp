@@ -1,6 +1,5 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
-import co.edu.eam.disenosoftware.mitienda.exceptions.APIException;
 import co.edu.eam.disenosoftware.mitienda.util.APIErrorHandler;
 import co.edu.eam.disenosoftware.mitienda.util.RetroFitUtils;
 import co.edu.eam.disenosoftware.mitienda.webservices.OrderAPIClient;
@@ -13,6 +12,7 @@ import java.io.IOException;
  * Repository to access orders data
  */
 public class OrdersRepository {
+
 
   public void endOrder(Long orderId) throws IOException {
 
@@ -29,4 +29,20 @@ public class OrdersRepository {
 
   }
 
+
+  /**
+   * Function to use the deliverOrder controller
+   * @param id , id
+   * @throws  IOException , throws exception if response is not successful
+   */
+
+  public void deliverOrder(Long id) throws IOException {
+    OrderAPIClient orderApiClient = RetroFitUtils.buildAPIClient(OrderAPIClient.class);
+    Call<Void> request = orderApiClient.deliverOrder(id);
+    Response<Void> response = request.execute();
+
+    if (!response.isSuccessful()) {
+      throw APIErrorHandler.throwApiException(response);
+    }
+  }
 }
