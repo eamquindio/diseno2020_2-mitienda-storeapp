@@ -1,18 +1,33 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
-import co.edu.eam.disenosoftware.mitienda.exceptions.APIException;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.util.APIErrorHandler;
 import co.edu.eam.disenosoftware.mitienda.util.RetroFitUtils;
 import co.edu.eam.disenosoftware.mitienda.webservices.OrderAPIClient;
 import retrofit2.Call;
 import retrofit2.Response;
-
 import java.io.IOException;
+import co.edu.eam.disenosoftware.mitienda.webservices.StoreAPIClient;
+import java.util.List;
 
 /**
  * Repository to access orders data
  */
 public class OrdersRepository {
+  public List<Order> getOrderByStore(Long storeId) throws IOException {
+
+    StoreAPIClient apiClient =  RetroFitUtils.buildAPIClient(StoreAPIClient.class);
+
+    Call<List<Order>> request = apiClient.getOrderByStore(storeId);
+    Response<List<Order>> response = request.execute();
+
+    if (response.isSuccessful()) {
+      return response.body();
+    } else {
+      throw APIErrorHandler.throwApiException(response);
+    }
+  }
+
 
   public void endOrder(Long orderId) throws IOException {
 
@@ -29,4 +44,20 @@ public class OrdersRepository {
 
   }
 
+
+  /**
+   * Function to use the deliverOrder controller
+   * @param id , id
+   * @throws  IOException , throws exception if response is not successful
+   */
+
+  public void deliverOrder(Long id) throws IOException {
+    OrderAPIClient orderApiClient = RetroFitUtils.buildAPIClient(OrderAPIClient.class);
+    Call<Void> request = orderApiClient.deliverOrder(id);
+    Response<Void> response = request.execute();
+
+    if (!response.isSuccessful()) {
+      throw APIErrorHandler.throwApiException(response);
+    }
+  }
 }
