@@ -16,7 +16,7 @@ import javax.swing.*;
 public abstract class Page extends JFrame {
     public static double WIDTH = 500;
     public static double HEIGHT = 1000;
-    
+
     public static double D_HEIGHT = 700.0;
 
     private JMenu menu;
@@ -26,22 +26,32 @@ public abstract class Page extends JFrame {
     private JMenuItem menuHistory;
     private JMenuItem menuBack;
 
+
+    /**
+     * init the page data
+     */
+    public abstract void init() throws Exception;
+
     /**
      * params to send to gui
      */
     protected Map<String, Object> params;
 
     /**
-     * Constructor 
+     * Constructor
      */
     public Page() {
         params = new HashMap<>();
-        buildPage();
+        try {
+            buildPage();
+        }catch (Exception exc) {
+            exc.printStackTrace();
+        }
     }
 
     /**
      * Set parametrers to the Frame
-     * @param params 
+     * @param params
      */
     public void setParams(Map<String, Object> params) {
         this.params = params;
@@ -51,25 +61,26 @@ public abstract class Page extends JFrame {
      * abstract methdo to implement conten of the page
      * @return component to render in the center of the page
      */
-    public abstract JComponent buildContent();
+    public abstract JComponent buildContent() throws Exception;
 
     /**
      * abstract methdo to implement header of the page
      * @return component to render in the header of the page
      */
-    public abstract JComponent buildHeader();
+    public abstract JComponent buildHeader() throws Exception;
 
     /**
      * abstract methdo to implement footer of the page
      * @return component to render in the footer of the page
      */
-    public abstract JComponent buildFooter();
+    public abstract JComponent buildFooter() throws Exception;
 
     /**
      * Method to build the whole page
      */
-    private void buildPage() {
+    private void buildPage() throws Exception {
         buildMenu();
+        init();
         JComponent content = buildContent();
         JComponent header  = buildHeader();
         JComponent footer  = buildFooter();
@@ -115,7 +126,7 @@ public abstract class Page extends JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goToFrame("Profile");
             }
-            
+
         });
         menu.add(menuPerfil);
 
@@ -134,8 +145,8 @@ public abstract class Page extends JFrame {
             }
         });
         menu.add(menuHistory);
-        
-        
+
+
         menuBack.setText("Back");
         menuBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,13 +154,13 @@ public abstract class Page extends JFrame {
             }
         });
         menu.add(menuBack);
-        
-        
+
+
         menuBar.add(menu);
         setJMenuBar(menuBar);
     }
-    
-       
+
+
     /**
      * go to frame
      * @param frame class name of the frame 
@@ -159,17 +170,17 @@ public abstract class Page extends JFrame {
         setVisible(true);
         this.dispose();
     }
-    
+
     /**
      * Go Back
      */
     public void goBack() {
         if(Navigator.goBack()!=null) {
-              setVisible(true);
-            this.dispose();  
+            setVisible(true);
+            this.dispose();
         };
     }
-    
+
     /**
      * method to navigate to a frame
      * @param frame class name of the frame
@@ -180,11 +191,11 @@ public abstract class Page extends JFrame {
         setVisible(true);
         this.dispose();
     }
-    
+
     /**
      * method to get param
      * @param key
-     * @return 
+     * @return
      */
     public Object getParam(String key) {
         return params.get(key);
