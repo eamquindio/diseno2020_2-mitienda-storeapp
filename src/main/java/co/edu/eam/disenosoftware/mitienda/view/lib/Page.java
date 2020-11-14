@@ -160,6 +160,13 @@ public abstract class Page extends JFrame {
         setJMenuBar(menuBar);
     }
 
+    public void refresh() throws Exception {
+        getContentPane().removeAll();
+        getContentPane().repaint();
+
+        buildPage();
+    }
+
 
     /**
      * go to frame
