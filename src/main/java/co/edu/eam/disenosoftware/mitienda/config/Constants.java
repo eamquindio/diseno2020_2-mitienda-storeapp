@@ -13,13 +13,18 @@ public class Constants {
   public static final String PRODUCT_IMAGE_URL = "https://raw.githubusercontent.com/eamquindio/mitiendacdn/main/images/products/";
 
   /**
+   * Products image not founded
+   */
+  public static final String PRODUCT_IMAGE_NOT_FOUNDED_URL = "images/notfound.png";
+
+  /**
    * oficcial green
    */
-  public static final Color COLOR_GREEN = new Color(122,191,181);
+  public static final Color COLOR_GREEN = new Color(122, 191, 181);
 
   /**
    * Title Font
    */
-  public static final Font TITLE_FONT = new Font ("TimesRoman", Font.BOLD | Font.ITALIC, 20);
+  public static final Font TITLE_FONT = new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20);
 
 }

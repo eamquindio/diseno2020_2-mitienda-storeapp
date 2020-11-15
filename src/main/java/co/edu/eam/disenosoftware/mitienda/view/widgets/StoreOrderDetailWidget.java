@@ -14,12 +14,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
   private StoreOrderDetailController storeOrderDetailController;
-  private Page storeOrderDetailPage;
+  private final Page storeOrderDetailPage;
 
   public StoreOrderDetailWidget(OrderProduct data, Page page) {
     super(data);
@@ -29,12 +28,16 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
   @Override
   public void build() {
 
-    this.setBackground(new Color(255, 255, 255));
+    this.setBackground(Color.white);
     this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(204, 204, 204)));
-
-    ImageIcon image = ImageUtil.loadFromURL(Constants.PRODUCT_IMAGE_URL +
-                    data.getProductStore().getProduct().getId() + "_small.jpg",
-            70, 80);
+    ImageIcon image = new ImageIcon();
+    try {
+      image = ImageUtil.loadFromURL(Constants.PRODUCT_IMAGE_URL +
+                      data.getProductStore().getProduct().getId() + "_small.jpg",
+              70, 80);
+    } catch (Exception ex) {
+      image = ImageUtil.loadFromURL(Constants.PRODUCT_IMAGE_NOT_FOUNDED_URL, 70, 80);
+    }
 
     JLabel lblImage = new JLabel(image);
 
@@ -48,15 +51,16 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
     JButton btnCheck = new JButton("Encontrar");
     btnCheck.setFont(new Font("", Font.BOLD, 12));
-    btnCheck.setForeground(new Color(255, 255, 255));
+    btnCheck.setForeground(Color.white);
 
-    btnCheck.setBackground(new Color(122, 191, 181));
+    btnCheck.setBackground(Constants.COLOR_GREEN);
 
     btnCheck.setUI(new BasicButtonUI() {
       @Override
       public void paint(Graphics grphcs, JComponent jc) {
         Graphics2D grphcs2D = (Graphics2D) grphcs.create();
-        grphcs2D.setColor(new Color(122, 191, 181));
+        grphcs2D.setColor(Constants.COLOR_GREEN);
+        grphcs2D.setBackground(Constants.COLOR_GREEN);
         grphcs2D.dispose();
         super.paint(grphcs, jc);
       }
@@ -71,7 +75,7 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
       }
 
       public void mouseExited(MouseEvent evt) {
-        btnCheck.setBackground(new Color(122, 191, 181));
+        btnCheck.setBackground(Constants.COLOR_GREEN);
       }
     });
 
@@ -84,7 +88,7 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
     JButton btnDelete = new JButton("Eliminar");
     btnDelete.setFont(new Font("", Font.BOLD, 12));
-    btnDelete.setForeground(new Color(255, 255, 255));
+    btnDelete.setForeground(Color.white);
     btnDelete.setBackground(new Color(220, 53, 69));
 
     btnDelete.setUI(new BasicButtonUI() {
@@ -92,6 +96,7 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
       public void paint(Graphics grphcs, JComponent jc) {
         Graphics2D grphcs2D = (Graphics2D) grphcs.create();
         grphcs2D.setColor(new Color(220, 53, 69));
+        grphcs2D.setBackground(new Color(220, 53, 69));
         grphcs2D.dispose();
         super.paint(grphcs, jc);
       }
@@ -103,7 +108,7 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
     btnDelete.addMouseListener(new MouseAdapter() {
       public void mouseEntered(MouseEvent evt) {
-        btnDelete.setBackground(new java.awt.Color(185, 47, 61));
+        btnDelete.setBackground(new Color(185, 47, 61));
       }
 
       public void mouseExited(MouseEvent evt) {
@@ -118,7 +123,7 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
       }
     });
 
-    javax.swing.GroupLayout orderDetailWidgetLayout = new GroupLayout(this);
+    GroupLayout orderDetailWidgetLayout = new GroupLayout(this);
     this.setLayout(orderDetailWidgetLayout);
     orderDetailWidgetLayout.setHorizontalGroup(
             orderDetailWidgetLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -157,11 +162,10 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
   private void btnCheckActionPerformed(ActionEvent evt, Long id) {
     storeOrderDetailController = new StoreOrderDetailController();
+
     try {
       storeOrderDetailController.checkProduct(id);
       storeOrderDetailPage.refresh();
-    } catch (IOException io) {
-      io.printStackTrace();
     } catch (Exception ex) {
       ex.printStackTrace();
     }
@@ -169,11 +173,10 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
   private void btnDeleteActionPerformed(ActionEvent evt, Long id) {
     storeOrderDetailController = new StoreOrderDetailController();
+
     try {
       storeOrderDetailController.deleteOrderProductById(id);
       storeOrderDetailPage.refresh();
-    } catch (IOException io) {
-      io.printStackTrace();
     } catch (Exception ex) {
       ex.printStackTrace();
     }

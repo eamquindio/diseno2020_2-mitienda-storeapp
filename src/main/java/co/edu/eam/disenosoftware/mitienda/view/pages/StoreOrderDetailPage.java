@@ -45,16 +45,17 @@ public class StoreOrderDetailPage extends Page {
   @Override
   public JComponent buildContent() throws Exception {
     this.productsToChoose = 0;
+
     List<OrderProduct> orderProducts = order.getProduct();
+
     JPanel panelProducts = new JPanel();
 
     int rows = this.productsToChoose == orderProducts.size() ? 1 : orderProducts.size();
-    panelProducts.setLayout(new GridLayout(rows, 0, 0, 10));
 
-    panelProducts.setBackground(new Color(255, 255, 255));
+    panelProducts.setLayout(new GridLayout(rows, 0, 0, 10));
+    panelProducts.setBackground(Color.white);
 
     for (OrderProduct orderProduct : orderProducts) {
-
       if (!orderProduct.getState().equals("pending")) {
         this.productsToChoose++;
         rows--;
@@ -69,7 +70,7 @@ public class StoreOrderDetailPage extends Page {
     } else if (rows == 0) {
       JPanel panelFinishedOrder = new JPanel();
       panelFinishedOrder.setLayout(new BorderLayout());
-      panelFinishedOrder.setBackground(new Color(255, 255, 255));
+      panelFinishedOrder.setBackground(Color.white);
 
       JLabel lblFinishOrder = new JLabel("La orden esta lista para ser entregada");
       lblFinishOrder.setFont(new Font("Arial", Font.BOLD, 13));
@@ -83,7 +84,7 @@ public class StoreOrderDetailPage extends Page {
       JButton btnFinishOrder = new JButton("Finalizar orden");
       btnFinishOrder.setPreferredSize(new Dimension(btnFinishOrder.getPreferredSize().width, 50));
       btnFinishOrder.setMaximumSize(new Dimension(336, 50));
-      btnFinishOrder.setForeground(new Color(255, 255, 255));
+      btnFinishOrder.setForeground(Color.white);
 
       btnFinishOrder.setBackground(Constants.COLOR_GREEN);
       btnFinishOrder.setUI(new BasicButtonUI() {
@@ -142,7 +143,8 @@ public class StoreOrderDetailPage extends Page {
 
     JScrollPane scrollPane = new JScrollPane(panelProducts);
     scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    scrollPane.setBackground(new Color(255, 255, 255));
+    scrollPane.setBackground(Color.white);
+    scrollPane.getViewport().setOpaque(false);
 
     return scrollPane;
   }
@@ -164,17 +166,17 @@ public class StoreOrderDetailPage extends Page {
 
     JLabel lblOrderClient = new JLabel("Orden de " + clientName);
     lblOrderClient.setFont(new Font("", Font.BOLD, 12));
-    lblOrderClient.setForeground(new Color(255, 255, 255));
+    lblOrderClient.setForeground(Color.white);
     lblOrderClient.setHorizontalAlignment(SwingConstants.LEFT);
 
     JLabel lblTotalOrder = new JLabel("<html><b>Total orden:</b> $" + order.getTotalValue() + "</html>");
     lblTotalOrder.setFont(new Font("", Font.PLAIN, 12));
-    lblTotalOrder.setForeground(new Color(255, 255, 255));
+    lblTotalOrder.setForeground(Color.white);
     lblTotalOrder.setHorizontalAlignment(SwingConstants.LEFT);
 
     JLabel lblQuantityProducts = new JLabel("<html><b>Productos</b> " + this.productsToChoose + "/" + order.getProduct().size() + "</html>");
     lblQuantityProducts.setFont(new Font("", Font.PLAIN, 12));
-    lblQuantityProducts.setForeground(new Color(255, 255, 255));
+    lblQuantityProducts.setForeground(Color.white);
     lblQuantityProducts.setHorizontalAlignment(SwingConstants.RIGHT);
 
     GroupLayout panelOrderDetailsLayout = new GroupLayout(panelOrderDetails);
@@ -213,11 +215,11 @@ public class StoreOrderDetailPage extends Page {
 
     JPanel panel = new JPanel();
     panel.setLayout(new GridLayout(1, 0));
-    panel.setBackground(new Color(255, 255, 255));
+    panel.setBackground(Color.white);
 
     JButton btnAdd = new JButton("Agregar producto");
     btnAdd.setBackground(new Color(0, 123, 255));
-    btnAdd.setForeground(new Color(255, 255, 255));
+    btnAdd.setForeground(Color.white);
 
     btnAdd.setBorderPainted(false);
     btnAdd.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -257,6 +259,7 @@ public class StoreOrderDetailPage extends Page {
       public void paint(Graphics grphcs, JComponent jc) {
         Graphics2D grphcs2D = (Graphics2D) grphcs.create();
         grphcs2D.setColor(new Color(51, 153, 255));
+        grphcs2D.setBackground(new Color(51, 153, 255));
         grphcs2D.dispose();
         super.paint(grphcs, jc);
       }
