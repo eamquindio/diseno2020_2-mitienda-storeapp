@@ -6,7 +6,7 @@ import co.edu.eam.disenosoftware.mitienda.util.LocalStorage;
 import co.edu.eam.disenosoftware.mitienda.view.controllers.StoreOrderController;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Page;
 import co.edu.eam.disenosoftware.mitienda.view.widgets.StoreOrderDeliveredWidget;
-import co.edu.eam.disenosoftware.mitienda.view.widgets.StoreOrderInProgresWidget;
+import co.edu.eam.disenosoftware.mitienda.view.widgets.StoreOrderInProgressWidget;
 import co.edu.eam.disenosoftware.mitienda.view.widgets.StoreOrderPreparedWidget;
 
 import javax.swing.*;
@@ -155,17 +155,18 @@ public class StoreOrderPage extends Page {
 
         for (int i = 0; i < orders.size(); i++) {
 
-            if (order.get(i).getState().equals("created") || order.get(i).getState().equals("pending")) {
+            if (order.get(i).getState().equals("created")) {
 
-                StoreOrderInProgresWidget storeOrderInProgresWidget = new StoreOrderInProgresWidget(order.get(i));
-                panelGrid.add(storeOrderInProgresWidget);
-            }
-            if (order.get(i).getState().equals("checked")) {
-
-                StoreOrderPreparedWidget storeOrderPreparedWidget = new StoreOrderPreparedWidget(order.get(i));
-                panelGridPreparados.add(storeOrderPreparedWidget);
+                StoreOrderInProgressWidget storeOrderInProgressWidget = new StoreOrderInProgressWidget(order.get(i),this);
+                panelGrid.add(storeOrderInProgressWidget);
             }
             if (order.get(i).getState().equals("finished")) {
+
+                StoreOrderPreparedWidget storeOrderInProgressWidget = new StoreOrderPreparedWidget(order.get(i),this);
+                panelGridPreparados.add(storeOrderInProgressWidget);
+
+            }
+            if (order.get(i).getState().equals("delivered")) {
 
                 StoreOrderDeliveredWidget storeOrderDeliveredWidget = new StoreOrderDeliveredWidget(order.get(i));
                 panelGridEntregados.add(storeOrderDeliveredWidget);
@@ -211,5 +212,10 @@ public class StoreOrderPage extends Page {
     @Override
     public JComponent buildFooter() throws Exception {
         return null;
+    }
+
+    @Override
+    public void refresh() throws Exception {
+        super.refresh();
     }
 }

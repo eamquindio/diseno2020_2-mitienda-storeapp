@@ -1,6 +1,7 @@
 package co.edu.eam.disenosoftware.mitienda.view.widgets;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+import co.edu.eam.disenosoftware.mitienda.view.lib.Page;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Widget;
 
 import javax.swing.*;
@@ -29,7 +30,7 @@ public class StoreOrderDeliveredWidget extends Widget<Order> {
         JLabel lblUser = new JLabel();
         JLabel lblOrderId = new JLabel();
 
-        if (data.getState().equals("delivered")) {
+
             this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
             this.setBackground(Color.white);
 
@@ -63,7 +64,6 @@ public class StoreOrderDeliveredWidget extends Widget<Order> {
                                     .addComponent(lblOrderId, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                     .addGap(0, 30, Short.MAX_VALUE))
             );
-        }
 
     }
 }

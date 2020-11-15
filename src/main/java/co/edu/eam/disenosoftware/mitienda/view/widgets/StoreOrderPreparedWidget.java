@@ -1,104 +1,115 @@
 package co.edu.eam.disenosoftware.mitienda.view.widgets;
 
+import co.edu.eam.disenosoftware.mitienda.config.Constants;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
-import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
-import co.edu.eam.disenosoftware.mitienda.util.LocalStorage;
-import co.edu.eam.disenosoftware.mitienda.view.lib.Navigator;
+import co.edu.eam.disenosoftware.mitienda.repositories.OrdersRepository;
+import co.edu.eam.disenosoftware.mitienda.view.lib.Page;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Widget;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.Map;
+
 
 /**
- * Store order prepared widget
+ * Store order in progress widget
  */
 public class StoreOrderPreparedWidget extends Widget<Order> {
 
+    private final Page page;
+    OrdersRepository order = new OrdersRepository();
+
     /**
-     * Store order prepared widget extends data
-     *
-     * @param data ,data order
+     * Store order in progress widget extends data
+     * @param data , data order
      */
-    public StoreOrderPreparedWidget(Order data) {
+    public StoreOrderPreparedWidget(Order data, Page page) {
         super(data);
+        this.page=page;
     }
 
     /**
-     * Store order prepared widget build
+     * Store order in progress widget build
      */
     @Override
     public void build() {
+        JButton btnEntregar = new JButton();
+        JLabel lblNameUser = new JLabel();
+        JLabel lblIdUser = new JLabel();
 
-        JLabel lblUser = new JLabel();
-        JLabel lblCountProduct = new JLabel();
+        btnEntregar.setBackground(Constants.COLOR_GREEN);
+        btnEntregar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnEntregar.setBorderPainted(false);
+        btnEntregar.setFocusPainted(false);
+        btnEntregar.setForeground(Color.white);
 
-
-        this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        this.setBackground(Color.white);
-        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        this.addMouseListener(new MouseAdapter() {
-
+        btnEntregar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                setBackground(new Color(103,159,152));
+                btnEntregar.setBackground(new Color(103,159,152));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                setBackground(Color.white);
+
+                btnEntregar.setBackground(Constants.COLOR_GREEN);
             }
         });
 
-        this.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnEntregar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-                Map<String, Object> params = new HashMap<>();
+                try {
 
-                params.put("orderId", data.getId());
+                    order.deliverOrder(data.getId());
+                    page.refresh();
 
-                LocalStorage.saveData("orderId", data.getId());
-
-                Navigator.goToFrame("StoreOrderDetailPage", params);
+                } catch (Exception exc) {
+                    exc.getStackTrace();
+                }
 
             }
         });
+        ActionListener actionListener;
 
-        lblUser.setText(data.getUser().getName());
+        this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        this.setBackground(Color.white);
 
-        int count = 0;
-
-        for (OrderProduct orderProduct : data.getProduct()) {
-            if (orderProduct.getState().equals("checked")) {
-                count++;
-            }
-        }
-        lblCountProduct.setText(count + " de " + data.getProduct().size());
-
-
+        btnEntregar.setText("Entregar");
+        lblNameUser.setText(data.getUser().getName());
+        lblIdUser.setText(data.getUser().getId().toString());
+        lblNameUser.setFont(new Font("", 0, 10));
         GroupLayout jPanelLayout = new GroupLayout(this);
         this.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
                 jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelLayout.createSequentialGroup()
-                                .addContainerGap()
+                        .addGroup(GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, 0)
                                 .addGroup(jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblUser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanelLayout.createSequentialGroup()
-                                                .addComponent(lblCountProduct, GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                                                .addContainerGap())))
+                                        .addComponent(lblNameUser, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblIdUser, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                                .addComponent(btnEntregar, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
         jPanelLayout.setVerticalGroup(
                 jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(lblUser, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                                .addComponent(lblCountProduct, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 20, Short.MAX_VALUE))
+                                .addGroup(jPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanelLayout.createSequentialGroup()
+                                                .addGap(0, 20, Short.MAX_VALUE)
+                                                .addComponent(btnEntregar, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+                                                .addGap(24, 24, 24))
+                                        .addGroup(jPanelLayout.createSequentialGroup()
+                                                .addComponent(lblNameUser, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(lblIdUser, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))))
         );
 
     }
