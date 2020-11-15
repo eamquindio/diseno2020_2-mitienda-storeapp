@@ -9,12 +9,13 @@ import co.edu.eam.disenosoftware.mitienda.view.widgets.AddProductsDetailWidget;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddProductPage extends Page {
 
-  String name;
+  private String name = null;
 
   private Order order;
   /**
@@ -37,18 +38,26 @@ public class AddProductPage extends Page {
 
   @Override
   public JComponent buildContent() throws Exception {
-    name = "cereal";
-    System.out.println("content" + name);
-    List<Product> productList =controller.listAllProductByName(name);
-    List<AddProductsDetailWidget> productsWidgets = new ArrayList<>();
-    for(Product product: productList){
-      AddProductsDetailWidget wdgt = new AddProductsDetailWidget(product);
-      productsWidgets.add(wdgt);
+    if (this.name==null) {
+      JLabel label = new JLabel("Aun no se ha realizado ninguna busqueda");
+      return label;
+    } else {
+      List<Product> productList = controller.listAllProductByName(name);
+      List<AddProductsDetailWidget> productsWidgets = new ArrayList<>();
+      for (Product product : productList) {
+        AddProductsDetailWidget wdgt = new AddProductsDetailWidget(product);
+        productsWidgets.add(wdgt);
+      }
+        ListView<JComponent> listView = new ListView(productsWidgets, ListView.ListViewOrientation.VERTICAL);
+        return listView;
     }
-    ListView<JComponent> listView = new ListView(productsWidgets, ListView.ListViewOrientation.VERTICAL);
-    return listView;
+
   }
 
+  @Override
+  public void refresh() throws Exception {
+    super.refresh();
+  }
 
   @Override
   public JComponent buildHeader() throws Exception {
@@ -59,7 +68,14 @@ public class AddProductPage extends Page {
     panel.add(txt);
     txt.addKeyListener(new java.awt.event.KeyAdapter() {
       public void keyTyped(java.awt.event.KeyEvent evt) {
-        name = txt.getText();
+        try{
+          name = txt.getText();
+          AddProductPage.super.refresh();
+        }catch (IOException io){
+          io.printStackTrace();
+        }catch (Exception ex){
+          ex.printStackTrace();
+        }
         System.out.println("header" + name);
       }
     });
