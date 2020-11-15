@@ -29,7 +29,7 @@ public class StoreOrderDeliveredWidget extends Widget<Order> {
         JLabel lblUser = new JLabel();
         JLabel lblOrderId = new JLabel();
 
-        if (!data.getState().equals("checked")) {
+        if (data.getState().equals("delivered")) {
             this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
             this.setBackground(Color.white);
 
