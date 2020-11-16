@@ -19,9 +19,13 @@ public class Main {
    * @param args the command line arguments
    */
   public static void main(String[] args) {
+<<<<<<< HEAD
     Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
     LocalStorage.saveData("orderId", 1l);
     Navigator.goToFrame("StoreOrderPage");
+=======
+    // TODO code application logic here
+>>>>>>> 65c65fe... Corrigiendo errores
   }
 
 }
