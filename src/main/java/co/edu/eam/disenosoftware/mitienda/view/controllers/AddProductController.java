@@ -16,26 +16,14 @@ public class AddProductController {
   /**
    * order repository
    */
-  private OrdersRepository ordersRepository;
 
   private ProductsRepository productsRepository;
 
   public AddProductController() {
-    ordersRepository = new OrdersRepository();
     productsRepository = new ProductsRepository();
   }
 
-  /**
-   * get the order
-   * @param id order id to get
-   * @return order
-   */
-  public Order getOrder(Long id) throws IOException {
-    ordersRepository = new OrdersRepository();
-    return ordersRepository.getOrderById(id);
-  }
-
-  public List<Product> listAllProductByName(String name) throws IOException {
+  public List<Product> listAllProductByName(String name){
     productsRepository = new ProductsRepository();
     return productsRepository.getProductsByName(name);
   }

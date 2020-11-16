@@ -3,20 +3,19 @@ package co.edu.eam.disenosoftware.mitienda.view.widgets;
 import co.edu.eam.disenosoftware.mitienda.config.Constants;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Product;
 import co.edu.eam.disenosoftware.mitienda.util.ImageUtil;
-import co.edu.eam.disenosoftware.mitienda.util.LocalStorage;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Navigator;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Widget;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddProductsDetailWidget extends Widget<Product> {
+public class DialogAddProductWidget extends Widget<Product> {
 
-  public AddProductsDetailWidget(Product data) {
+  public DialogAddProductWidget(Product data) {
     super(data);
   }
 
@@ -30,24 +29,15 @@ public class AddProductsDetailWidget extends Widget<Product> {
             100, 80);
     JLabel lblImage = new JLabel(image);
     this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-
     this.setPreferredSize(new Dimension(getPreferredSize().width, 150));
     JPanel panelInfo = new JPanel();
     JLabel lblName = new JLabel(name);
-    lblName.setBorder(new EmptyBorder(50,0,0,10));
-    panelInfo.add(lblName);
-
-    this.addMouseListener(new java.awt.event.MouseAdapter() {
-      public void mouseClicked(java.awt.event.MouseEvent evt) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("product", data);
-        LocalStorage.saveData("product", data);
-        Navigator.goToFrame("DialogAddProductPage",params);
-      }
-    });
+    lblName.setBorder(new EmptyBorder(130,0,0,10));
     panelInfo.setBackground(Color.white);
+    this.setBackground(Color.white);
+    panelInfo.add(lblName);
     this.add(lblImage);
     this.add(panelInfo);
-    this.setBackground(Color.white);
+    this.setBorder(new LineBorder(Color.black));
   }
 }
