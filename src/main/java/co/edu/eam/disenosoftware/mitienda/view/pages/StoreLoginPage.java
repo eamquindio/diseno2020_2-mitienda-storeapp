@@ -83,17 +83,13 @@ public class StoreLoginPage extends Page {
       @Override
       public void actionPerformed(ActionEvent e) {
         try {
-          Store store = storeLoginController.loginStore(txtEmail.getText(), txtPassword.getText());
-
+          Long id = storeLoginController.loginStore(txtEmail.getText(), txtPassword.getText());
           Map<String, Object> params = new HashMap<>();
-          params.put("storeId", store.getId());
-
-          LocalStorage.saveData("storeId", store.getId());
+          params.put("storeId", id);
           Navigator.goToFrame("Home", params);
         } catch (Exception ex) {
           ex.printStackTrace();
         }
-
       }
     });
 
