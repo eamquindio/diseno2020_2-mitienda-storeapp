@@ -84,8 +84,10 @@ public class StoreLoginPage extends Page {
       public void actionPerformed(ActionEvent e) {
         try {
           Long id = storeLoginController.loginStore(txtEmail.getText(), txtPassword.getText());
+
           Map<String, Object> params = new HashMap<>();
           params.put("storeId", id);
+
           Navigator.goToFrame("Home", params);
         } catch (Exception ex) {
           ex.printStackTrace();
