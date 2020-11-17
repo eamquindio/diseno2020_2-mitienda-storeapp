@@ -17,7 +17,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.io.IOException;
-import java.lang.invoke.ConstantBootstraps;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class DialogAddProductPage extends Page {
   }
 
   @Override
-  public void init() throws Exception {
+  public void init(){
     controller = new DialogAddProductController();
     product = LocalStorage.getData("product", Product.class);
     Long orderId = LocalStorage.getData("orderId", Long.class);
@@ -48,7 +47,7 @@ public class DialogAddProductPage extends Page {
   }
 
   @Override
-  public JComponent buildContent() throws Exception {
+  public JComponent buildContent(){
     JPanel panelM = new JPanel();
     panelM.setLayout(new BoxLayout(panelM, BoxLayout.Y_AXIS));
     List<DialogAddProductWidget> productsWidgets = new ArrayList<>();
@@ -83,11 +82,7 @@ public class DialogAddProductPage extends Page {
     JButton cancelar = new JButton("Cancelar");
     enviar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-          controller.addProductToOrder(order.getId(),product.getId(),quantity);
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+        controller.addProductToOrder(order.getId(),product.getId(),quantity);
       }
     });
     cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,12 +102,12 @@ public class DialogAddProductPage extends Page {
   }
 
   @Override
-  public void refresh() throws Exception {
+  public void refresh(){
     super.refresh();
   }
 
   @Override
-  public JComponent buildHeader() throws Exception {
+  public JComponent buildHeader(){
     JPanel panel = new JPanel();
     panel.setLayout(new GridLayout(1,1));
     panel.setBackground(Color.white);

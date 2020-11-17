@@ -21,12 +21,12 @@ public class DialogAddProductController {
    * @param id order id to get
    * @return order
    */
-  public Order getOrder(Long id) throws IOException {
+  public Order getOrder(Long id){
     ordersRepository = new OrdersRepository();
     return ordersRepository.getOrderById(id);
   }
 
-  public Order addProductToOrder(Long orderId, Long productId, int quantity) throws IOException {
+  public Order addProductToOrder(Long orderId, Long productId, int quantity){
     ordersRepository = new OrdersRepository();
     AddProductRequest body = new AddProductRequest(quantity, productId);
     return ordersRepository.addProduct(orderId, body);
