@@ -37,9 +37,9 @@ public class StoreOrderPage extends Page {
   public void init()  {
     storeOrderController = new StoreOrderController();
 
-    Long orderId = (Long) getParam("orderId");
-    orderId = LocalStorage.getData("orderId", Long.class);
-    this.order = storeOrderController.getOrderByStoreId(orderId);
+    Long storeId = (Long) getParam("storeId");
+    storeId = LocalStorage.getData("storeId", Long.class);
+    this.order = storeOrderController.getOrderByStoreId(storeId);
   }
 
   /**
