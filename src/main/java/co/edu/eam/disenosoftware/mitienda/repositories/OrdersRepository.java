@@ -1,5 +1,6 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
+import co.edu.eam.disenosoftware.mitienda.exceptions.TecnicalException;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.requests.AddProductRequest;
 import co.edu.eam.disenosoftware.mitienda.util.APIErrorHandler;
@@ -17,31 +18,37 @@ import java.util.List;
  */
 public class OrdersRepository {
 
-  public List<Order> getOrderByStore(Long storeId) throws IOException {
+  public List<Order> getOrderByStore(Long storeId) {
     StoreAPIClient apiClient = RetroFitUtils.buildAPIClient(StoreAPIClient.class);
+    try {
+      Call<List<Order>> request = apiClient.getOrderByStore(storeId);
+      Response<List<Order>> response = request.execute();
 
-    Call<List<Order>> request = apiClient.getOrderByStore(storeId);
-    Response<List<Order>> response = request.execute();
-
-    if (response.isSuccessful()) {
-      return response.body();
-    } else {
-      throw APIErrorHandler.throwApiException(response);
+      if (response.isSuccessful()) {
+        return response.body();
+      } else {
+        throw APIErrorHandler.throwApiException(response);
+      }
+    } catch (IOException exc) {
+      throw new TecnicalException(exc);
     }
   }
 
 
-  public void endOrder(Long orderId) throws IOException {
+  public void endOrder(Long orderId) {
 
     OrderAPIClient apiClient = RetroFitUtils.buildAPIClient(OrderAPIClient.class);
+    try {
+      //Hacer el Request
+      Call<Void> request = apiClient.endOrder(orderId);
+      Response<Void> response = request.execute();
 
-    //Hacer el Request
-    Call<Void> request = apiClient.endOrder(orderId);
-    Response<Void> response = request.execute();
-
-    //procesar la respuesta
-    if (!response.isSuccessful()) {
-      throw APIErrorHandler.throwApiException(response);
+      //procesar la respuesta
+      if (!response.isSuccessful()) {
+        throw APIErrorHandler.throwApiException(response);
+      }
+    } catch (IOException exc) {
+      throw new TecnicalException(exc);
     }
 
   }
@@ -50,15 +57,19 @@ public class OrdersRepository {
    * Function to use the deliverOrder controller
    *
    * @param id , id
-   * @throws IOException , throws exception if response is not successful
+   * @ ,  if response is not successful
    */
-  public void deliverOrder(Long id) throws IOException {
+  public void deliverOrder(Long id) {
     OrderAPIClient orderApiClient = RetroFitUtils.buildAPIClient(OrderAPIClient.class);
     Call<Void> request = orderApiClient.deliverOrder(id);
-    Response<Void> response = request.execute();
+    try {
+      Response<Void> response = request.execute();
 
-    if (!response.isSuccessful()) {
-      throw APIErrorHandler.throwApiException(response);
+      if (!response.isSuccessful()) {
+        throw APIErrorHandler.throwApiException(response);
+      }
+    } catch (IOException exc) {
+      throw new TecnicalException(exc);
     }
   }
 
@@ -67,17 +78,21 @@ public class OrdersRepository {
    *
    * @param id , id
    * @return , the response body
-   * @throws IOException , if response fails throws the exception
+   * @ , if response fails throws the exception
    */
-  public Order getOrderById(long id) throws IOException {
+  public Order getOrderById(long id) {
     OrderAPIClient orderAPIClient = RetroFitUtils.buildAPIClient(OrderAPIClient.class);
     Call<Order> request = orderAPIClient.getOrderById(id);
-    Response<Order> response = request.execute();
+    try {
+      Response<Order> response = request.execute();
 
-    if (response.isSuccessful()) {
-      return response.body();
+      if (response.isSuccessful()) {
+        return response.body();
+      }
+      throw APIErrorHandler.throwApiException(response);
+    } catch (IOException exc) {
+      throw new TecnicalException(exc);
     }
-    throw APIErrorHandler.throwApiException(response);
   }
 
   /**
@@ -86,17 +101,21 @@ public class OrdersRepository {
    * @param orderId
    * @param body
    * @return the order after
-   * @throws IOException
+   * @
    */
-  public Order addProduct(Long orderId, AddProductRequest body) throws IOException {
+  public Order addProduct(Long orderId, AddProductRequest body) {
     OrderAPIClient orderAPIClient = RetroFitUtils.buildAPIClient(OrderAPIClient.class);
 
     Call<Order> request = orderAPIClient.addProduct(orderId, body);
-    Response<Order> response = request.execute();
+    try {
+      Response<Order> response = request.execute();
 
-    if (response.isSuccessful()) {
-      return response.body();
+      if (response.isSuccessful()) {
+        return response.body();
+      }
+      throw APIErrorHandler.throwApiException(response);
+    } catch (IOException exc) {
+      throw new TecnicalException(exc);
     }
-    throw APIErrorHandler.throwApiException(response);
   }
 }

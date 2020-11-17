@@ -3,7 +3,6 @@ package co.edu.eam.disenosoftware.mitienda.view.controllers;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrdersRepository;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -12,22 +11,23 @@ import java.util.List;
 public class StoreOrderController {
 
 
-    private OrdersRepository ordersRepository;
+  private final OrdersRepository ordersRepository;
 
-    /**
-     * Store order controller constructor
-     */
-    public StoreOrderController() {
-        ordersRepository = new OrdersRepository();
-    }
+  /**
+   * Store order controller constructor
+   */
+  public StoreOrderController() {
+    ordersRepository = new OrdersRepository();
+  }
 
-    /**
-     * Store order get order by id function
-     * @param id , store id
-     * @return , list of orders
-     * @throws IOException , exception
-     */
-    public List<Order> getOrderByStoreId(Long id) throws IOException {
-        return ordersRepository.getOrderByStore(id);
-    }
+  /**
+   * Store order get order by id function
+   *
+   * @param id , store id
+   * @return , list of orders
+   * @ , exception
+   */
+  public List<Order> getOrderByStoreId(Long id) {
+    return ordersRepository.getOrderByStore(id);
+  }
 }

@@ -34,7 +34,7 @@ public class StoreOrderDetailPage extends Page {
   }
 
   @Override
-  public void init() throws Exception {
+  public void init()  {
     storeOrderDetailController = new StoreOrderDetailController();
 
     Long orderId = LocalStorage.getData("orderId", Long.class);
@@ -43,7 +43,7 @@ public class StoreOrderDetailPage extends Page {
   }
 
   @Override
-  public JComponent buildContent() throws Exception {
+  public JComponent buildContent()  {
     this.productsToChoose = 0;
 
     List<OrderProduct> orderProducts = order.getProduct();
@@ -119,14 +119,8 @@ public class StoreOrderDetailPage extends Page {
       btnFinishOrder.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          try {
             storeOrderDetailController.endOrder(order.getId());
             StoreOrderDetailPage.super.refresh();
-          } catch (IOException io) {
-            io.printStackTrace();
-          } catch (Exception ex) {
-            ex.printStackTrace();
-          }
         }
       });
 
@@ -150,7 +144,7 @@ public class StoreOrderDetailPage extends Page {
   }
 
   @Override
-  public JComponent buildHeader() throws Exception {
+  public JComponent buildHeader()  {
 
     JPanel panel = new JPanel();
     panel.setPreferredSize(new Dimension(panel.getPreferredSize().width, 50));
@@ -211,7 +205,7 @@ public class StoreOrderDetailPage extends Page {
   }
 
   @Override
-  public JComponent buildFooter() throws Exception {
+  public JComponent buildFooter()  {
 
     JPanel panel = new JPanel();
     panel.setLayout(new GridLayout(1, 0));
@@ -273,7 +267,7 @@ public class StoreOrderDetailPage extends Page {
   }
 
   @Override
-  public void refresh() throws Exception {
+  public void refresh()  {
     super.refresh();
   }
 }

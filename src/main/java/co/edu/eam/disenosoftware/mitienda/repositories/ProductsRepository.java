@@ -1,5 +1,6 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
+import co.edu.eam.disenosoftware.mitienda.exceptions.TecnicalException;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Product;
 import co.edu.eam.disenosoftware.mitienda.util.APIErrorHandler;
 import co.edu.eam.disenosoftware.mitienda.util.RetroFitUtils;
@@ -20,18 +21,22 @@ public class ProductsRepository {
    *
    * @param name
    * @return ist of products
-   * @throws IOException
+   * @
    */
-  public List<Product> getProductsByName(String name) throws IOException {
+  public List<Product> getProductsByName(String name) {
     ProductAPIClient apiClient = RetroFitUtils.buildAPIClient(ProductAPIClient.class);
 
     Call<List<Product>> request = apiClient.getProductByName(name);
-    Response<List<Product>> response = request.execute();
+    try {
+      Response<List<Product>> response = request.execute();
 
-    if (response.isSuccessful()) {
-      return response.body();
-    } else {
-      throw APIErrorHandler.throwApiException(response);
+      if (response.isSuccessful()) {
+        return response.body();
+      } else {
+        throw APIErrorHandler.throwApiException(response);
+      }
+    } catch (IOException exc) {
+      throw new TecnicalException(exc);
     }
   }
 }

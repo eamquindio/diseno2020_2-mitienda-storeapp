@@ -1,5 +1,6 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
+import co.edu.eam.disenosoftware.mitienda.exceptions.TecnicalException;
 import co.edu.eam.disenosoftware.mitienda.util.APIErrorHandler;
 import co.edu.eam.disenosoftware.mitienda.util.RetroFitUtils;
 import co.edu.eam.disenosoftware.mitienda.webservices.OrderProductAPIClient;
@@ -13,31 +14,37 @@ import java.io.IOException;
  */
 public class OrderProductRepository {
 
-  public void deleteOrderProductById(Long orderProductId) throws IOException {
+  public void deleteOrderProductById(Long orderProductId) {
     //crear el cliente del api - crear quien hace el requst
     OrderProductAPIClient apiClient = RetroFitUtils.buildAPIClient(OrderProductAPIClient.class);
+    try {
+      //hacer el request
+      Call<Void> request = apiClient.deleteOrderProductById(orderProductId);
+      Response<Void> response = request.execute();
 
-    //hacer el request
-    Call<Void> request = apiClient.deleteOrderProductById(orderProductId);
-    Response<Void> response = request.execute();
-
-    //procesar la respuesta
-    if (!(response.isSuccessful())) {
-      throw APIErrorHandler.throwApiException(response);
+      //procesar la respuesta
+      if (!(response.isSuccessful())) {
+        throw APIErrorHandler.throwApiException(response);
+      }
+    } catch (IOException exc) {
+      throw new TecnicalException(exc);
     }
   }
 
-  public void checkProduct(Long orderProductId) throws IOException {
+  public void checkProduct(Long orderProductId) {
     //crear el cliente del api - crear quien hace el requst
     OrderProductAPIClient apiClient = RetroFitUtils.buildAPIClient(OrderProductAPIClient.class);
+    try {
+      //hacer el request
+      Call<Void> request = apiClient.checkProduct(orderProductId);
+      Response<Void> response = request.execute();
 
-    //hacer el request
-    Call<Void> request = apiClient.checkProduct(orderProductId);
-    Response<Void> response = request.execute();
-
-    //procesar la respuesta
-    if (!(response.isSuccessful())) {
-      throw APIErrorHandler.throwApiException(response);
+      //procesar la respuesta
+      if (!(response.isSuccessful())) {
+        throw APIErrorHandler.throwApiException(response);
+      }
+    } catch (IOException exc) {
+      throw new TecnicalException(exc);
     }
   }
 }

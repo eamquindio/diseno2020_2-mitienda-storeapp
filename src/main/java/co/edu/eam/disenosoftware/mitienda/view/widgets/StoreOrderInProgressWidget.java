@@ -19,101 +19,101 @@ import java.util.Map;
  */
 public class StoreOrderInProgressWidget extends Widget<Order> {
 
-    private final Page page;
+  private final Page page;
 
-    /**
-     * Store order prepared widget extends data
-     *
-     * @param data ,data order
-     */
-    public StoreOrderInProgressWidget(Order data, Page page) {
-        super(data);
-        this.page = page;
-    }
-
-
-    /**
-     * Store order prepared widget build
-     */
-    @Override
-    public void build() {
-
-        JLabel lblUser = new JLabel();
-        JLabel lblCountProduct = new JLabel();
+  /**
+   * Store order prepared widget extends data
+   *
+   * @param data ,data order
+   */
+  public StoreOrderInProgressWidget(Order data, Page page) {
+    super(data);
+    this.page = page;
+  }
 
 
-        this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        this.setBackground(Color.white);
-        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        this.addMouseListener(new MouseAdapter() {
+  /**
+   * Store order prepared widget build
+   */
+  @Override
+  public void build() {
 
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                setBackground(new Color(103, 159, 152));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                setBackground(Color.white);
-            }
-        });
-
-        this.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-
-                Map<String, Object> params = new HashMap<>();
-
-                params.put("orderId", data.getId());
-
-                LocalStorage.saveData("orderId", data.getId());
-
-                Navigator.goToFrame("StoreOrderDetailPage", params);
-
-                try {
-
-                    page.refresh();
-
-                } catch (Exception exc) {
-                    exc.getStackTrace();
-                }
+    JLabel lblUser = new JLabel();
+    JLabel lblCountProduct = new JLabel();
 
 
-            }
-        });
+    this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+    this.setBackground(Color.white);
+    this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    this.addMouseListener(new MouseAdapter() {
 
-        lblUser.setText(data.getUser().getName());
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        setBackground(new Color(103, 159, 152));
+      }
 
-        int count = 0;
+      @Override
+      public void mouseExited(MouseEvent e) {
+        setBackground(Color.white);
+      }
+    });
 
-        for (OrderProduct orderProduct : data.getProduct()) {
-            if (orderProduct.getState().equals("checked")) {
-                count++;
-            }
+    this.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("orderId", data.getId());
+
+        LocalStorage.saveData("orderId", data.getId());
+
+        Navigator.goToFrame("StoreOrderDetailPage", params);
+
+        try {
+
+          page.refresh();
+
+        } catch (Exception exc) {
+          exc.getStackTrace();
         }
-        lblCountProduct.setText(count + " de " + data.getProduct().size());
 
 
-        GroupLayout jPanelLayout = new GroupLayout(this);
-        this.setLayout(jPanelLayout);
-        jPanelLayout.setHorizontalGroup(
-                jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblUser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanelLayout.createSequentialGroup()
-                                                .addComponent(lblCountProduct, GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                                                .addContainerGap())))
-        );
-        jPanelLayout.setVerticalGroup(
-                jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblUser, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                                .addComponent(lblCountProduct, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 20, Short.MAX_VALUE))
-        );
+      }
+    });
 
+    lblUser.setText(data.getUser().getName());
+
+    int count = 0;
+
+    for (OrderProduct orderProduct : data.getProduct()) {
+      if (orderProduct.getState().equals("checked")) {
+        count++;
+      }
     }
+    lblCountProduct.setText(count + " de " + data.getProduct().size());
+
+
+    GroupLayout jPanelLayout = new GroupLayout(this);
+    this.setLayout(jPanelLayout);
+    jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblUser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanelLayout.createSequentialGroup()
+                                            .addComponent(lblCountProduct, GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                                            .addContainerGap())))
+    );
+    jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(lblUser, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                            .addComponent(lblCountProduct, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 20, Short.MAX_VALUE))
+    );
+
+  }
 }

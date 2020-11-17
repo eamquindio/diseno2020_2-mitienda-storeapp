@@ -1,5 +1,6 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
+import co.edu.eam.disenosoftware.mitienda.exceptions.TecnicalException;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 import co.edu.eam.disenosoftware.mitienda.model.requests.StoreLoginRequest;
 import co.edu.eam.disenosoftware.mitienda.util.APIErrorHandler;
@@ -20,18 +21,21 @@ public class StoresRepository {
    *
    * @param body email and password
    * @return Logged store
-   * @throws IOException IOException
+   * @ IOException
    */
-  public Store storeLogin(StoreLoginRequest body) throws IOException {
+  public Store storeLogin(StoreLoginRequest body) {
     StoreAPIClient storeAPIClient = RetroFitUtils.buildAPIClient(StoreAPIClient.class);
+    try {
+      Call<Store> storeRequest = storeAPIClient.storeLogin(body);
+      Response<Store> storeResponse = storeRequest.execute();
 
-    Call<Store> storeRequest = storeAPIClient.storeLogin(body);
-    Response<Store> storeResponse = storeRequest.execute();
-
-    if (storeResponse.isSuccessful()) {
-      return storeResponse.body();
-    } else {
-      throw APIErrorHandler.throwApiException(storeResponse);
+      if (storeResponse.isSuccessful()) {
+        return storeResponse.body();
+      } else {
+        throw APIErrorHandler.throwApiException(storeResponse);
+      }
+    } catch (IOException exc) {
+      throw new TecnicalException(exc);
     }
   }
 }
