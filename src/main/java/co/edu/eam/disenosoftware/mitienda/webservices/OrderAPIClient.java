@@ -34,6 +34,6 @@ public interface OrderAPIClient {
 
 
   @PUT(ORDER_URL + "{id}/add-product")
-  Call<Order> addProduct(@Path("id") long id, @Body AddProductRequest body);
+  Call<Order> addProduct(@Path("id") Long id, @Body AddProductRequest body);
 
 }
