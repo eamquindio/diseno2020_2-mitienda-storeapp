@@ -9,6 +9,7 @@ import co.edu.eam.disenosoftware.mitienda.exceptions.ExceptionHandler;
 import co.edu.eam.disenosoftware.mitienda.util.LocalStorage;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Navigator;
 
+
 /**
  * @author caferrerb
  */
@@ -18,9 +19,7 @@ public class Main {
    * @param args the command line arguments
    */
   public static void main(String[] args) {
-    Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
-    LocalStorage.saveData("storeId", 1l);
-    Navigator.goToFrame("StoreOrderPage");
+
   }
 
 }

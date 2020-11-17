@@ -101,7 +101,7 @@ public class OrdersRepository {
    * @param orderId
    * @param body
    * @return the order after
-   * @
+   * @throws IOException
    */
   public Order addProduct(Long orderId, AddProductRequest body) {
     OrderAPIClient orderAPIClient = RetroFitUtils.buildAPIClient(OrderAPIClient.class);

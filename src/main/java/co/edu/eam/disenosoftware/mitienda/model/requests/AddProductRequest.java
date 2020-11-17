@@ -13,17 +13,17 @@ public class AddProductRequest {
   /**
    * product to add
    */
-  private Long productId;
+  private Long id;
 
   /**
    * Constructor
    *
    * @param quantity
-   * @param productId
+   * @param id
    */
-  public AddProductRequest(Integer quantity, Long productId) {
+  public AddProductRequest(Integer quantity, Long id) {
     this.quantity = quantity;
-    this.productId = productId;
+    this.id = id;
   }
 
   public Integer getQuantity() {
@@ -34,11 +34,11 @@ public class AddProductRequest {
     this.quantity = quantity;
   }
 
-  public Long getProductId() {
-    return productId;
+  public Long getId() {
+    return id;
   }
 
-  public void setProductId(Long productId) {
-    this.productId = productId;
+  public void setId(Long productId) {
+    this.id = id;
   }
 }
