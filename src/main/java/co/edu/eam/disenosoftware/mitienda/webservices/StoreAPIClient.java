@@ -45,4 +45,12 @@ public interface StoreAPIClient {
 
   @GET(ORDERS_URL + "{store_id}/orders")
   Call<List<Order>> getOrderByStore(@Path("store_id") Long storeId);
+
+  /**
+   * Store's register - Web Service
+   *
+   * @param request user
+   */
+  @POST(STORES_URL + "register")
+  Call<Void> registerStore(@Body Store request);
 }

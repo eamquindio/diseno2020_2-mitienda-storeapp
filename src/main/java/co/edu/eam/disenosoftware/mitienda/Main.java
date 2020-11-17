@@ -19,7 +19,7 @@ public class Main {
    */
   public static void main(String[] args) {
     Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
-    LocalStorage.saveData("orderId", 1l);
+    LocalStorage.saveData("storeId", 1l);
     Navigator.goToFrame("StoreOrderPage");
   }
 
