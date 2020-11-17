@@ -34,4 +34,15 @@ public class StoresRepository {
       throw APIErrorHandler.throwApiException(storeResponse);
     }
   }
+
+  public void createStore(Store store) throws IOException {
+    StoreAPIClient storeAPIClient = RetroFitUtils.buildAPIClient(StoreAPIClient.class);
+
+    Call<Void> storeRequest = storeAPIClient.registerStore(store);
+    Response<Void> storeResponse = storeRequest.execute();
+
+    if (!storeResponse.isSuccessful()) {
+      throw APIErrorHandler.throwApiException(storeResponse);
+    }
+  }
 }
