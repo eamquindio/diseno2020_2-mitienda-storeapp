@@ -42,11 +42,6 @@ public class StoreSignUpPage extends Page {
     JTextField txtOwner = new JTextField();
     txtOwner.setFont(new Font("Tahoma", Font.PLAIN, 14));
     txtOwner.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(204, 204, 204)));
-    txtOwner.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent evt) {
-        System.out.println("xd");
-      }
-    });
 
     JLabel lblPhone = new JLabel("Telefono:");
     lblPhone.setFont(new Font("Tahoma", Font.BOLD, 15));
