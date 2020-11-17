@@ -23,6 +23,11 @@ public class Constants {
   public static final Color COLOR_GREEN = new Color(122, 191, 181);
 
   /**
+   * oficcial red
+   */
+  public static final Color COLOR_RED =new Color(220, 53, 69);
+
+  /**
    * Title Font
    */
   public static final Font TITLE_FONT = new Font("TimesRoman", Font.BOLD | Font.ITALIC, 20);

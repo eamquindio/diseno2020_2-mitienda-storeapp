@@ -89,7 +89,7 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
     JButton btnDelete = new JButton("Eliminar");
     btnDelete.setFont(new Font("", Font.BOLD, 12));
     btnDelete.setForeground(Color.white);
-    btnDelete.setBackground(new Color(220, 53, 69));
+    btnDelete.setBackground(Constants.COLOR_RED);
 
     btnDelete.setUI(new BasicButtonUI() {
       @Override
