@@ -18,11 +18,9 @@ import java.awt.event.MouseEvent;
 public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
   private StoreOrderDetailController storeOrderDetailController;
-  private final Page storeOrderDetailPage;
 
   public StoreOrderDetailWidget(OrderProduct data, Page page) {
-    super(data);
-    this.storeOrderDetailPage = page;
+    super(data,page);
   }
 
   @Override
@@ -165,7 +163,7 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
     try {
       storeOrderDetailController.checkProduct(id);
-      storeOrderDetailPage.refresh();
+      parentPage.refresh();
     } catch (Exception ex) {
       ex.printStackTrace();
     }
@@ -176,7 +174,7 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
     try {
       storeOrderDetailController.deleteOrderProductById(id);
-      storeOrderDetailPage.refresh();
+      parentPage.refresh();
     } catch (Exception ex) {
       ex.printStackTrace();
     }
