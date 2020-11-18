@@ -40,6 +40,7 @@ public class StoreOrderInProgressWidget extends Widget<Order> {
 
     JLabel lblUser = new JLabel();
     JLabel lblCountProduct = new JLabel();
+    JLabel lblTelefono = new JLabel();
 
 
     this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
@@ -86,33 +87,36 @@ public class StoreOrderInProgressWidget extends Widget<Order> {
     int count = 0;
 
     for (OrderProduct orderProduct : data.getProduct()) {
-      if (orderProduct.getState().equals("checked")) {
+      if (!orderProduct.getState().equals("pending")) {
         count++;
       }
     }
     lblCountProduct.setText(count + " de " + data.getProduct().size());
+    lblTelefono.setText("Telefono: "+data.getUser().getPhone());
 
 
     GroupLayout jPanelLayout = new GroupLayout(this);
     this.setLayout(jPanelLayout);
     jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanelLayout.createSequentialGroup()
-                                            .addComponent(lblCountProduct, GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                                            .addContainerGap())))
+            .addGroup(jPanelLayout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addGroup(jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUser, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                            .addComponent(lblCountProduct, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTelefono, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap())
     );
     jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(lblUser, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
                             .addComponent(lblCountProduct, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 20, Short.MAX_VALUE))
+                            .addGap(18, 18, 18)
+                            .addComponent(lblTelefono, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 30, Short.MAX_VALUE))
     );
 
   }
