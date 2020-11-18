@@ -25,7 +25,7 @@ public class Constants {
   /**
    * Official green hover
    */
-  public static final Color COLOR_GREEN_HOVER = new Color(122, 191, 181);
+  public static final Color COLOR_GREEN_HOVER = new Color(103, 159, 152);
 
   /**
    * Official red

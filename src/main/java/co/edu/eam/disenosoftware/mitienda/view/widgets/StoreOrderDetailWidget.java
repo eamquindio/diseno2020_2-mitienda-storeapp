@@ -80,7 +80,7 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
     btnCheck.setFocusPainted(false);
     btnCheck.addMouseListener(new MouseAdapter() {
       public void mouseEntered(MouseEvent evt) {
-        btnCheck.setBackground(new Color(103, 159, 152));
+        btnCheck.setBackground(Constants.COLOR_GREEN_HOVER);
       }
 
       public void mouseExited(MouseEvent evt) {
@@ -104,8 +104,8 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
       @Override
       public void paint(Graphics grphcs, JComponent jc) {
         Graphics2D grphcs2D = (Graphics2D) grphcs.create();
-        grphcs2D.setColor(new Color(220, 53, 69));
-        grphcs2D.setBackground(new Color(220, 53, 69));
+        grphcs2D.setColor(Constants.COLOR_RED);
+        grphcs2D.setBackground(Constants.COLOR_RED);
         grphcs2D.dispose();
         super.paint(grphcs, jc);
       }
@@ -117,11 +117,11 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
     btnDelete.addMouseListener(new MouseAdapter() {
       public void mouseEntered(MouseEvent evt) {
-        btnDelete.setBackground(new Color(185, 47, 61));
+        btnDelete.setBackground(Constants.COLOR_RED_HOVER);
       }
 
       public void mouseExited(MouseEvent evt) {
-        btnDelete.setBackground(new Color(220, 53, 69));
+        btnDelete.setBackground(Constants.COLOR_RED);
       }
     });
 
