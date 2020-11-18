@@ -7,6 +7,7 @@ import co.edu.eam.disenosoftware.mitienda.view.lib.Page;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Widget;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,6 +48,16 @@ public class StoreOrderPreparedWidget extends Widget<Order> {
     btnEntregar.setFocusPainted(false);
     btnEntregar.setForeground(Color.white);
 
+    btnEntregar.setUI(new BasicButtonUI() {
+      @Override
+      public void paint(Graphics grphcs, JComponent jc) {
+        Graphics2D grphcs2D = (Graphics2D) grphcs.create();
+        grphcs2D.setColor(Constants.COLOR_GREEN);
+        grphcs2D.setBackground(Constants.COLOR_GREEN);
+        grphcs2D.dispose();
+        super.paint(grphcs, jc);
+      }
+    });
     btnEntregar.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseEntered(MouseEvent e) {
@@ -80,7 +91,7 @@ public class StoreOrderPreparedWidget extends Widget<Order> {
     this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
     this.setBackground(Color.white);
 
-    btnEntregar.setText("Entregar");
+    btnEntregar.setText(page.getString("storeOrderPreparedsWidget.btn_deliver_title"));
     lblNameUser.setText(data.getUser().getName());
     lblIdUser.setText(data.getUser().getId().toString());
     lblNameUser.setFont(new Font("", 0, 10));

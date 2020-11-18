@@ -66,19 +66,7 @@ public class StoreOrderInProgressWidget extends Widget<Order> {
 
         params.put("orderId", data.getId());
 
-        LocalStorage.saveData("orderId", data.getId());
-
-        Navigator.goToFrame("StoreOrderDetailPage", params);
-
-        try {
-
-          page.refresh();
-
-        } catch (Exception exc) {
-          exc.getStackTrace();
-        }
-
-
+        page.goToFrame("StoreOrderDetailPage", params);
       }
     });
 
