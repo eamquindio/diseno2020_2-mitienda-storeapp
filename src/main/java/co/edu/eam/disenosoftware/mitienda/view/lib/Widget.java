@@ -7,10 +7,12 @@ import javax.swing.*;
  */
 public abstract class Widget<D> extends JPanel {
 
-  /**
-   * ehlp data to render the widget
-   */
   protected D data;
+
+  /**
+   * parente page.
+   */
+  protected Page parentPage;
 
   /**
    * parente page.

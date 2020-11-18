@@ -2,8 +2,6 @@ package co.edu.eam.disenosoftware.mitienda.view.widgets;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
-import co.edu.eam.disenosoftware.mitienda.util.LocalStorage;
-import co.edu.eam.disenosoftware.mitienda.view.lib.Navigator;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Page;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Widget;
 
@@ -80,7 +78,7 @@ public class StoreOrderInProgressWidget extends Widget<Order> {
       }
     }
     lblCountProduct.setText(count + " de " + data.getProduct().size());
-    lblTelefono.setText("Telefono: "+data.getUser().getPhone());
+    lblTelefono.setText(data.getUser().getPhone());
 
 
     GroupLayout jPanelLayout = new GroupLayout(this);

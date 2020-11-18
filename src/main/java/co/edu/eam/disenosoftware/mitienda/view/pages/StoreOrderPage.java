@@ -92,7 +92,7 @@ public class StoreOrderPage extends Page {
                         .addComponent(jScrollpanelPreparacion, GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
         );
 
-        tbdContainer.addTab("En preparacion", panebPreparacion);
+        tbdContainer.addTab(getString("storeorderpage.in_progress_title"), panebPreparacion);
 
 
         panelFlowPreparados.add(panelGridPreparados);
@@ -110,7 +110,7 @@ public class StoreOrderPage extends Page {
                         .addComponent(jScrollPanelPreparados, GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
         );
 
-        tbdContainer.addTab("Preparados", panelPreparados);
+        tbdContainer.addTab(getString("storeorderpage.prepared_title"), panelPreparados);
 
 
         panelFlowEntregados.add(panelGridEntregados);
@@ -128,7 +128,7 @@ public class StoreOrderPage extends Page {
                         .addComponent(jScrollPanelEntregados, GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
         );
 
-        tbdContainer.addTab("Entregados", panelEntregados);
+        tbdContainer.addTab(getString("storeorderpage.delivered_title"), panelEntregados);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,8 +161,8 @@ public class StoreOrderPage extends Page {
             }
             if (order.get(i).getState().equals("finished")) {
 
-                StoreOrderPreparedWidget storeOrderInProgressWidget = new StoreOrderPreparedWidget(order.get(i), this);
-                panelGridPreparados.add(storeOrderInProgressWidget);
+                StoreOrderPreparedWidget storeOrderPreparedWidget = new StoreOrderPreparedWidget(order.get(i), this);
+                panelGridPreparados.add(storeOrderPreparedWidget);
 
             }
             if (order.get(i).getState().equals("delivered")) {
@@ -185,7 +185,7 @@ public class StoreOrderPage extends Page {
     @Override
     public JComponent buildHeader() {
         JPanel panel = new JPanel();
-        JLabel title = new JLabel(" "+getString("storeOrderPage.mis_ordenes_title"));
+        JLabel title = new JLabel(getString("storeorderpage.my_orders_title"));
         title.setForeground(new Color(255, 255, 255));
         panel.setLayout(new GridLayout(1, 0));
         panel.setBackground(Constants.COLOR_GREEN);
