@@ -17,7 +17,6 @@ import java.util.Map;
  */
 public class StoreOrderInProgressWidget extends Widget<Order> {
 
-    private final Page page;
 
     /**
      * Store order prepared widget extends data
@@ -25,8 +24,7 @@ public class StoreOrderInProgressWidget extends Widget<Order> {
      * @param data ,data order
      */
     public StoreOrderInProgressWidget(Order data, Page page) {
-        super(data);
-        this.page = page;
+        super(data, page);
     }
 
 
@@ -64,7 +62,7 @@ public class StoreOrderInProgressWidget extends Widget<Order> {
 
                 params.put("orderId", data.getId());
 
-                page.goToFrame("StoreOrderDetailPage", params);
+                parentPage.goToFrame("StoreOrderDetailPage", params);
             }
         });
 

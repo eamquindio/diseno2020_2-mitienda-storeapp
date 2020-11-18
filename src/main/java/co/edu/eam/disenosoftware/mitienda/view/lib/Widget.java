@@ -7,6 +7,9 @@ import javax.swing.*;
  */
 public abstract class Widget<D> extends JPanel {
 
+  /**
+   * help data to render the widget
+   */
   protected D data;
 
 

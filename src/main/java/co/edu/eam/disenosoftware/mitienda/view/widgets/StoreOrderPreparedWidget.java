@@ -73,14 +73,8 @@ public class StoreOrderPreparedWidget extends Widget<Order> {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                try {
-
                     order.deliverOrder(data.getId());
                     parentPage.refresh();
-
-                } catch (Exception exc) {
-                    exc.getStackTrace();
-                }
 
             }
         });
