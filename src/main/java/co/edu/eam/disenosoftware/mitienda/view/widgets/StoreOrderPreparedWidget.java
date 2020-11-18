@@ -13,8 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 
 /**
@@ -30,7 +28,7 @@ public class StoreOrderPreparedWidget extends Widget<Order> {
      * @param data , data order
      */
     public StoreOrderPreparedWidget(Order data, Page page) {
-        super(data,page);
+        super(data, page);
     }
 
     /**
@@ -86,7 +84,6 @@ public class StoreOrderPreparedWidget extends Widget<Order> {
 
             }
         });
-        ActionListener actionListener;
 
         this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         this.setBackground(Color.white);
