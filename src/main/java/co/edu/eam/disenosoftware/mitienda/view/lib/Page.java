@@ -48,12 +48,6 @@ public abstract class Page extends JFrame {
     params = new HashMap<>();
     Locale locale = Locale.getDefault();
     resourceBundle = ResourceBundle.getBundle("messages", locale);
-    try {
-      buildPage();
-    } catch (Exception exc) {
-      exc.printStackTrace();
-    }
-
   }
 
   /**

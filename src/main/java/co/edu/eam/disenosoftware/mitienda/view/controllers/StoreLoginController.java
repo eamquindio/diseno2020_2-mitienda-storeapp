@@ -15,7 +15,7 @@ public class StoreLoginController {
     storesRepository = new StoresRepository();
   }
 
-  public Long loginStore(String email, String password) throws IOException {
+  public Long loginStore(String email, String password) {
     Store store = storesRepository.storeLogin(new StoreLoginRequest(email, password));
     LocalStorage.saveData("storeId", store.getId());
     return store.getId();
