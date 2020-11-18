@@ -89,7 +89,7 @@ public abstract class Page extends JFrame {
   /**
    * Method to build the whole page
    */
-  private void buildPage() {
+  public void buildPage() {
     buildMenu();
     init();
     JComponent content = buildContent();
