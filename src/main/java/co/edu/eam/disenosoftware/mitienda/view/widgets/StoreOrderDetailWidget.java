@@ -14,21 +14,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.NumberFormat;
 
 public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
   private StoreOrderDetailController storeOrderDetailController;
 
   public StoreOrderDetailWidget(OrderProduct data, Page page) {
-    super(data,page);
+    super(data, page);
   }
 
   @Override
   public void build() {
 
+    NumberFormat formatter = NumberFormat. getCurrencyInstance();
+
     this.setBackground(Color.white);
     this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(204, 204, 204)));
+
     ImageIcon image = new ImageIcon();
+
     try {
       image = ImageUtil.loadFromURL(Constants.PRODUCT_IMAGE_URL +
                       data.getProductStore().getProduct().getId() + "_small.jpg",
@@ -40,14 +45,20 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
     JLabel lblImage = new JLabel(image);
 
     String productName = data.getProductStore().getProduct().getName();
-    productName = productName.length() >= 18 ? productName.substring(0, 15) + "..." : productName;
+
+    productName = productName.length() >= 18 ?
+            productName.substring(0, 1).toUpperCase() + productName.substring(1, 13).toLowerCase() + "..."
+            : productName.substring(0, 1).toUpperCase() + productName.substring(1).toLowerCase();
 
     JLabel lblQuantityNameProduct = new JLabel(data.getQuantity() + " x " + productName);
     lblQuantityNameProduct.setFont(new Font("", Font.PLAIN, 12));
 
-    JLabel lblProductPrice = new JLabel("$" + data.getProductStore().getPrice() + " - 1 unidad");
+    String productPrice =formatter. format(data.getProductStore().getPrice());
 
-    JButton btnCheck = new JButton("Encontrar");
+    JLabel lblProductPrice = new JLabel(productPrice + " - 1 "
+            + parentPage.getString("storeorderdetailwidget.unit_price"));
+
+    JButton btnCheck = new JButton(parentPage.getString("storeorderdetailwidget.btn_check"));
     btnCheck.setFont(new Font("", Font.BOLD, 12));
     btnCheck.setForeground(Color.white);
 
@@ -160,23 +171,13 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
 
   private void btnCheckActionPerformed(ActionEvent evt, Long id) {
     storeOrderDetailController = new StoreOrderDetailController();
-
-    try {
-      storeOrderDetailController.checkProduct(id);
-      parentPage.refresh();
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
+    storeOrderDetailController.checkProduct(id);
+    parentPage.refresh();
   }
 
   private void btnDeleteActionPerformed(ActionEvent evt, Long id) {
     storeOrderDetailController = new StoreOrderDetailController();
-
-    try {
-      storeOrderDetailController.deleteOrderProductById(id);
-      parentPage.refresh();
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
+    storeOrderDetailController.deleteOrderProductById(id);
+    parentPage.refresh();
   }
 }

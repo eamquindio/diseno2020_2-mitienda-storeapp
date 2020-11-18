@@ -5,11 +5,7 @@
  */
 package co.edu.eam.disenosoftware.mitienda;
 
-import co.edu.eam.disenosoftware.mitienda.exceptions.ExceptionHandler;
-import co.edu.eam.disenosoftware.mitienda.model.entities.Product;
-import co.edu.eam.disenosoftware.mitienda.util.LocalStorage;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Navigator;
-
 
 /**
  * @author caferrerb
@@ -20,13 +16,6 @@ public class Main {
    * @param args the command line arguments
    */
   public static void main(String[] args) {
-
-    LocalStorage.saveData("storeId", 1l);
-
-    LocalStorage.saveData("orderId", 17l);
-
-    LocalStorage.saveData("product", new Product(211l, "211.jpg","papas"));
-    Navigator.goToFrame("StoreSignUpPage");
   }
 
 }
