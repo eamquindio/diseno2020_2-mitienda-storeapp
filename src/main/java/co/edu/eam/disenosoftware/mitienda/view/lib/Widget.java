@@ -9,10 +9,6 @@ public abstract class Widget<D> extends JPanel {
 
   protected D data;
 
-  /**
-   * parente page.
-   */
-  protected Page parentPage;
 
   /**
    * parente page.
