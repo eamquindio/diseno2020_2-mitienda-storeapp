@@ -33,6 +33,11 @@ public class Constants {
   public static final Color COLOR_RED = new Color(220, 53, 69);
 
   /**
+   * official gray
+   */
+  public static final Color COLOR_GRAY =new Color(204, 204, 204);
+
+  /**
    * Official red hover
    */
   public static final Color COLOR_RED_HOVER = new Color(185, 47, 61);

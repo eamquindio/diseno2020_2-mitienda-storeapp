@@ -59,7 +59,7 @@ public class StoreOrderPreparedWidget extends Widget<Order> {
         btnEntregar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                btnEntregar.setBackground(new Color(103, 159, 152));
+                btnEntregar.setBackground(Constants.COLOR_GREEN_HOVER);
             }
 
             @Override
@@ -73,8 +73,8 @@ public class StoreOrderPreparedWidget extends Widget<Order> {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                    order.deliverOrder(data.getId());
-                    parentPage.refresh();
+                order.deliverOrder(data.getId());
+                parentPage.refresh();
 
             }
         });
