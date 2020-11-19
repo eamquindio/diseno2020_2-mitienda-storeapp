@@ -31,6 +31,10 @@ public class Constants {
    * Official red
    */
   public static final Color COLOR_RED = new Color(220, 53, 69);
+  /**
+   * Official blue
+   */
+  public static final Color COLOR_BLUE = new Color(51, 153, 255);
 
   /**
    * official gray
