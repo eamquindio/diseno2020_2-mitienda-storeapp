@@ -5,6 +5,7 @@ import co.edu.eam.disenosoftware.mitienda.model.entities.Product;
 import co.edu.eam.disenosoftware.mitienda.util.ImageUtil;
 import co.edu.eam.disenosoftware.mitienda.util.LocalStorage;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Navigator;
+import co.edu.eam.disenosoftware.mitienda.view.lib.Page;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Widget;
 
 import javax.swing.*;
@@ -16,8 +17,8 @@ import java.util.Map;
 
 public class AddProductsDetailWidget extends Widget<Product> {
 
-  public AddProductsDetailWidget(Product data) {
-    super(data);
+  public AddProductsDetailWidget(Product data, Page page) {
+    super(data, page);
   }
 
   @Override
@@ -41,7 +42,7 @@ public class AddProductsDetailWidget extends Widget<Product> {
       public void mouseClicked(java.awt.event.MouseEvent evt) {
         Map<String, Object> params = new HashMap<>();
         params.put("product", data);
-        LocalStorage.saveData("product", data);
+        params.put("orderId", (Long)parentPage.getParam("orderId"));
         Navigator.goToFrame("DialogAddProductPage",params);
       }
     });
