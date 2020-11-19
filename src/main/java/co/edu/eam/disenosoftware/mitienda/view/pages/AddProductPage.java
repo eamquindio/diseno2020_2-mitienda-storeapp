@@ -11,11 +11,15 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddProductPage extends Page {
 
   private String name = null;
+
+  private Long orderId;
 
   /**
    * page controller
@@ -28,20 +32,20 @@ public class AddProductPage extends Page {
 
   @Override
   public void init(){
-
+    orderId = (Long)getParam("orderId");
   }
 
   @Override
   public JComponent buildContent(){
     if (this.name==null) {
-      JLabel label = new JLabel("Aun no se ha realizado ninguna busqueda");
+      JLabel label = new JLabel(getString("addproductpage.notsearchs"));
       label.setBorder(new EmptyBorder(40,50,0,0));
       return label;
     } else {
       List<Product> productList = controller.listAllProductByName(name);
       List<AddProductsDetailWidget> productsWidgets = new ArrayList<>();
       for (Product product : productList) {
-        AddProductsDetailWidget wdgt = new AddProductsDetailWidget(product);
+        AddProductsDetailWidget wdgt = new AddProductsDetailWidget(product, this);
         productsWidgets.add(wdgt);
       }
         ListView<JComponent> listView = new ListView(productsWidgets, ListView.ListViewOrientation.VERTICAL);

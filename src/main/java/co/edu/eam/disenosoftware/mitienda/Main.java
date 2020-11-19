@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.eam.disenosoftware.mitienda;
-
 import co.edu.eam.disenosoftware.mitienda.exceptions.ExceptionHandler;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Navigator;
 
