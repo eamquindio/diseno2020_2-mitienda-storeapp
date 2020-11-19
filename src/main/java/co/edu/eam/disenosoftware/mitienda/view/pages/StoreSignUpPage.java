@@ -6,6 +6,7 @@ import co.edu.eam.disenosoftware.mitienda.view.controllers.StoreSignUpController
 import co.edu.eam.disenosoftware.mitienda.view.lib.Page;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,54 +30,73 @@ public class StoreSignUpPage extends Page {
     JPanel pBody = new JPanel();
     pBody.setBackground(Color.white);
 
-    JLabel lblNameStore = new JLabel("Nombre:");
+    JLabel lblNameStore = new JLabel(getString("storesignuppage.name_title"));
     lblNameStore.setFont(new Font("Tahoma", Font.BOLD, 15));
 
     JTextField txtNameStore = new JTextField();
     txtNameStore.setFont(new Font("Tahoma", Font.PLAIN, 14));
     txtNameStore.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(204, 204, 204)));
 
-    JLabel lblOwner = new JLabel("Propietario:");
+    JLabel lblOwner = new JLabel(getString("storesignuppage.owner_title"));
     lblOwner.setFont(new Font("Tahoma", Font.BOLD, 15));
 
     JTextField txtOwner = new JTextField();
     txtOwner.setFont(new Font("Tahoma", Font.PLAIN, 14));
     txtOwner.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(204, 204, 204)));
 
-    JLabel lblPhone = new JLabel("Telefono:");
+    JLabel lblPhone = new JLabel(getString("storesignuppage.phone_title"));
     lblPhone.setFont(new Font("Tahoma", Font.BOLD, 15));
 
     JTextField txtPhone = new JTextField();
     txtPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
     txtPhone.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(204, 204, 204)));
 
-    JLabel lblPassword = new JLabel("Password:");
-    lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15)); // NOI18N
+    JLabel lblPassword = new JLabel(getString("storesignuppage.password_title"));
+    lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
 
     JTextField txtPassword = new JPasswordField();
-    txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 14)); // NOI18N
+    txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
     txtPassword.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(204, 204, 204)));
 
-    JLabel lblEmail = new JLabel("Email:");
-    lblEmail.setFont(new Font("Tahoma", Font.BOLD, 15)); // NOI18N
+    JLabel lblEmail = new JLabel(getString("storesignuppage.email_title"));
+    lblEmail.setFont(new Font("Tahoma", Font.BOLD, 15));
 
     JTextField txtEmail = new JTextField();
-    txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 14)); // NOI18N
+    txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
     txtEmail.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(204, 204, 204)));
 
-    JLabel lblAddress = new JLabel("Direccion:");
-    lblAddress.setFont(new Font("Tahoma", Font.BOLD, 15)); // NOI18N
+    JLabel lblAddress = new JLabel(getString("storesignuppage.address_title"));
+    lblAddress.setFont(new Font("Tahoma", Font.BOLD, 15));
 
     JTextField txtAddress = new JTextField();
-    txtAddress.setFont(new Font("Tahoma", Font.PLAIN, 14)); // NOI18N
+    txtAddress.setFont(new Font("Tahoma", Font.PLAIN, 14));
     txtAddress.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(204, 204, 204)));
 
     JButton btnCancel = new JButton("Cancelar");
-    btnCancel.setFont(new Font("Tahoma", Font.BOLD, 15)); // NOI18N
+    btnCancel.setFont(new Font("Tahoma", Font.BOLD, 15));
+
+    btnCancel.setForeground(Color.white);
+    btnCancel.setBackground(new Color(220, 53, 69));
+
+    btnCancel.setBorderPainted(false);
+    btnCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    btnCancel.setFocusPainted(false);
+
+    btnCancel.setUI(new BasicButtonUI() {
+      @Override
+      public void paint(Graphics grphcs, JComponent jc) {
+        Graphics2D grphcs2D = (Graphics2D) grphcs.create();
+        grphcs2D.setBackground(new Color(220, 53, 69));
+        grphcs2D.setColor(new Color(220, 53, 69));
+        grphcs2D.dispose();
+        super.paint(grphcs, jc);
+      }
+    });
+
     btnCancel.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        StoreSignUpPage.super.goBack();
+        goBack();
       }
     });
 
@@ -84,14 +104,26 @@ public class StoreSignUpPage extends Page {
     btnSignUp.setBackground(Constants.COLOR_GREEN);
     btnSignUp.setFont(new Font("Tahoma", Font.BOLD, 15));
     btnSignUp.setForeground(Color.white);
+
+    btnSignUp.setBorderPainted(false);
+    btnSignUp.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    btnSignUp.setFocusPainted(false);
+
+    btnSignUp.setUI(new BasicButtonUI() {
+      @Override
+      public void paint(Graphics grphcs, JComponent jc) {
+        Graphics2D grphcs2D = (Graphics2D) grphcs.create();
+        grphcs2D.setBackground(Constants.COLOR_GREEN);
+        grphcs2D.setColor(Constants.COLOR_GREEN);
+        grphcs2D.dispose();
+        super.paint(grphcs, jc);
+      }
+    });
+
     btnSignUp.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        try {
-          storeSignUpController.createStore(new Store(txtNameStore.getText(), txtOwner.getText(), txtAddress.getText(), txtPhone.getText(), txtEmail.getText(), txtPassword.getText()));
-          StoreSignUpPage.super.goBack();
-        } catch (Exception ex) {
-          ex.printStackTrace();
-        }
+        storeSignUpController.createStore(new Store(txtNameStore.getText(), txtOwner.getText(), txtAddress.getText(), txtPhone.getText(), txtEmail.getText(), txtPassword.getText()));
+        goBack();
       }
     });
 
