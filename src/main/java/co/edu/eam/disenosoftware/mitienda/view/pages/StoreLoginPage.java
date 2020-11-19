@@ -2,17 +2,15 @@ package co.edu.eam.disenosoftware.mitienda.view.pages;
 
 import co.edu.eam.disenosoftware.mitienda.config.Constants;
 import co.edu.eam.disenosoftware.mitienda.view.controllers.StoreLoginController;
-import co.edu.eam.disenosoftware.mitienda.view.lib.Navigator;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Page;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.Map;
 
 public class StoreLoginPage extends Page {
 
@@ -33,7 +31,7 @@ public class StoreLoginPage extends Page {
     JPanel pBody = new JPanel();
     pBody.setBackground(Color.white);
 
-    JLabel lblEmail = new JLabel("Email:");
+    JLabel lblEmail = new JLabel(getString("storeloginpage.email_title"));
     lblEmail.setFont(new Font("Tahoma", Font.BOLD, 15)); // NOI18N
     lblEmail.setText("Email:");
 
@@ -43,18 +41,16 @@ public class StoreLoginPage extends Page {
 
     JLabel lblPassword = new JLabel();
     lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15)); // NOI18N
-    lblPassword.setText("Password:");
+    lblPassword.setText(getString("storeloginpage.password_title"));
 
     JPasswordField txtPassword = new JPasswordField();
     txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 14)); // NOI18N
     txtPassword.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(204, 204, 204)));
 
-    JLabel lblMessage = new JLabel();
-    lblMessage.setFont(new Font("Tahoma", Font.PLAIN, 14)); // NOI18N
-    lblMessage.setText("No tienes una cuenta?");
-
-    JLabel lblSignUp = new JLabel("Registrarse");
+    JLabel lblSignUp = new JLabel(getString("storeloginpage.singup_title"));
     lblSignUp.setFont(new Font("Tahoma", Font.PLAIN, 14)); // NOI18N
+    lblSignUp.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
     lblSignUp.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseEntered(MouseEvent e) {
@@ -68,22 +64,36 @@ public class StoreLoginPage extends Page {
 
       @Override
       public void mouseClicked(MouseEvent e) {
-        Navigator.goToFrame("StoreSignUpPage");
+        goToFrame("StoreSignUpPage");
       }
     });
 
-    JButton btnLogin = new JButton();
+    JButton btnLogin = new JButton("Iniciar sesion");
+
     btnLogin.setBackground(Constants.COLOR_GREEN);
-    btnLogin.setFont(new Font("Tahoma", Font.BOLD, 15)); // NOI18N
-    btnLogin.setForeground(new Color(255, 255, 255));
-    btnLogin.setText("Iniciar sesion");
+    btnLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
+    btnLogin.setForeground(Color.white);
+
+    btnLogin.setBorderPainted(false);
+    btnLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    btnLogin.setFocusPainted(false);
+
+    btnLogin.setUI(new BasicButtonUI() {
+      @Override
+      public void paint(Graphics grphcs, JComponent jc) {
+        Graphics2D grphcs2D = (Graphics2D) grphcs.create();
+        grphcs2D.setColor(Constants.COLOR_GREEN);
+        grphcs2D.dispose();
+        super.paint(grphcs, jc);
+      }
+    });
+
     btnLogin.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-          Long id = storeLoginController.loginStore(txtEmail.getText(), txtPassword.getText());
-          Map<String, Object> params = new HashMap<>();
-          params.put("storeId", id);
-          goToFrame("Home", params);
+        storeLoginController.loginStore(txtEmail.getText(), txtPassword.getText());
+        JOptionPane.showMessageDialog(null,getString("storeloginpage.message_title"));
+        goToFrame("StoreOrderPage");
       }
     });
 
@@ -99,9 +109,8 @@ public class StoreLoginPage extends Page {
                                     .addComponent(lblPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnLogin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(pBodyLayout.createSequentialGroup()
-                                            .addComponent(lblMessage, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(lblSignUp, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                                            .addComponent(lblSignUp, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED))
                                     .addComponent(txtPassword))
                             .addGap(0, 58, Short.MAX_VALUE))
     );
@@ -120,7 +129,6 @@ public class StoreLoginPage extends Page {
                             .addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                             .addGap(37, 37, 37)
                             .addGroup(pBodyLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblMessage)
                                     .addComponent(lblSignUp))
                             .addContainerGap(148, Short.MAX_VALUE))
     );
@@ -143,7 +151,7 @@ public class StoreLoginPage extends Page {
 
     lblTitleHeader.setFont(new Font("Tahoma", Font.BOLD, 15)); // NOI18N
     lblTitleHeader.setForeground(Color.white);
-    lblTitleHeader.setText("Inicio de sesion");
+    lblTitleHeader.setText(getString("storeloginpage.login_title"));
     pBodyHeader.add(lblTitleHeader, BorderLayout.LINE_START);
 
     GroupLayout pHeaderLayout = new GroupLayout(pHeader);

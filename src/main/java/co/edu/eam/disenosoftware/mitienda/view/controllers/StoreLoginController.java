@@ -5,7 +5,7 @@ import co.edu.eam.disenosoftware.mitienda.model.requests.StoreLoginRequest;
 import co.edu.eam.disenosoftware.mitienda.repositories.StoresRepository;
 import co.edu.eam.disenosoftware.mitienda.util.LocalStorage;
 
-import java.io.IOException;
+import javax.swing.*;
 
 public class StoreLoginController {
 
@@ -15,9 +15,8 @@ public class StoreLoginController {
     storesRepository = new StoresRepository();
   }
 
-  public Long loginStore(String email, String password) {
+  public void loginStore(String email, String password) {
     Store store = storesRepository.storeLogin(new StoreLoginRequest(email, password));
     LocalStorage.saveData("storeId", store.getId());
-    return store.getId();
   }
 }
