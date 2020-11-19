@@ -5,14 +5,7 @@
  */
 package co.edu.eam.disenosoftware.mitienda;
 
-import co.edu.eam.disenosoftware.mitienda.exceptions.ExceptionHandler;
-import co.edu.eam.disenosoftware.mitienda.model.entities.Product;
-import co.edu.eam.disenosoftware.mitienda.util.LocalStorage;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Navigator;
-
-import java.util.HashMap;
-import java.util.Map;
-
 
 /**
  * @author caferrerb

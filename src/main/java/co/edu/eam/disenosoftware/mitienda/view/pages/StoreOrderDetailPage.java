@@ -3,9 +3,7 @@ package co.edu.eam.disenosoftware.mitienda.view.pages;
 import co.edu.eam.disenosoftware.mitienda.config.Constants;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
-import co.edu.eam.disenosoftware.mitienda.util.LocalStorage;
 import co.edu.eam.disenosoftware.mitienda.view.controllers.StoreOrderDetailController;
-import co.edu.eam.disenosoftware.mitienda.view.lib.Navigator;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Page;
 import co.edu.eam.disenosoftware.mitienda.view.widgets.StoreOrderDetailWidget;
 
@@ -16,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +25,12 @@ public class StoreOrderDetailPage extends Page {
 
   private Order order;
 
+  private Map<String, Object> params;
+
   private int productsToChoose;
 
   public StoreOrderDetailPage() {
+    params = new HashMap<>();
     storeOrderDetailController = new StoreOrderDetailController();
   }
 
@@ -37,7 +38,7 @@ public class StoreOrderDetailPage extends Page {
   public void init()  {
     storeOrderDetailController = new StoreOrderDetailController();
 
-    Long orderId = LocalStorage.getData("orderId", Long.class);
+    Long orderId = (Long) getParam("orderId");
 
     this.order = storeOrderDetailController.getOrder(orderId);
   }
@@ -66,22 +67,25 @@ public class StoreOrderDetailPage extends Page {
     }
 
     if (rows > 4) {
+
       panelProducts.setLayout(new GridLayout(rows, 0));
+
     } else if (rows == 0) {
+
       JPanel panelFinishedOrder = new JPanel();
       panelFinishedOrder.setLayout(new BorderLayout());
       panelFinishedOrder.setBackground(Color.white);
 
-      JLabel lblFinishOrder = new JLabel("La orden esta lista para ser entregada");
+      JLabel lblFinishOrder = new JLabel(getString("storeorderdetailpage.finish_order_title"));
       lblFinishOrder.setFont(new Font("Arial", Font.BOLD, 13));
       lblFinishOrder.setHorizontalAlignment(SwingConstants.CENTER);
       lblFinishOrder.setOpaque(true);
 
       if (order.getState().equals("finished")) {
-        lblFinishOrder.setText("Orden finalizada");
+        lblFinishOrder.setText(getString("storeorderdetailpage.order_completed_title"));
       }
 
-      JButton btnFinishOrder = new JButton("Finalizar orden");
+      JButton btnFinishOrder = new JButton(getString("storeorderdetailpage.btn_finish"));
       btnFinishOrder.setPreferredSize(new Dimension(btnFinishOrder.getPreferredSize().width, 50));
       btnFinishOrder.setMaximumSize(new Dimension(336, 50));
       btnFinishOrder.setForeground(Color.white);
@@ -105,7 +109,7 @@ public class StoreOrderDetailPage extends Page {
         btnFinishOrder.addMouseListener(new MouseAdapter() {
           @Override
           public void mouseEntered(MouseEvent e) {
-            btnFinishOrder.setBackground(new Color(103, 159, 152));
+            btnFinishOrder.setBackground(Constants.COLOR_GREEN_HOVER);
           }
 
           @Override
@@ -115,12 +119,11 @@ public class StoreOrderDetailPage extends Page {
         });
       }
 
-
       btnFinishOrder.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            storeOrderDetailController.endOrder(order.getId());
-            StoreOrderDetailPage.super.refresh();
+          storeOrderDetailController.endOrder(order.getId());
+          goBack();
         }
       });
 
@@ -146,6 +149,8 @@ public class StoreOrderDetailPage extends Page {
   @Override
   public JComponent buildHeader()  {
 
+    NumberFormat formatter = NumberFormat. getCurrencyInstance();
+
     JPanel panel = new JPanel();
     panel.setPreferredSize(new Dimension(panel.getPreferredSize().width, 50));
     panel.setMaximumSize(new Dimension(468, 50));
@@ -158,17 +163,19 @@ public class StoreOrderDetailPage extends Page {
     String clientName = order.getUser().getName();
     clientName = clientName.length() >= 37 ? clientName.substring(0, 37) + "..." : clientName;
 
-    JLabel lblOrderClient = new JLabel("Orden de " + clientName);
+    JLabel lblOrderClient = new JLabel(getString("storeorderdetailpage.order_client") + clientName);
     lblOrderClient.setFont(new Font("", Font.BOLD, 12));
     lblOrderClient.setForeground(Color.white);
     lblOrderClient.setHorizontalAlignment(SwingConstants.LEFT);
 
-    JLabel lblTotalOrder = new JLabel("<html><b>Total orden:</b> $" + order.getTotalValue() + "</html>");
+    String totalValue =formatter. format(order.getTotalValue());
+
+    JLabel lblTotalOrder = new JLabel("<html><b>" + getString("storeorderdetailpage.total_order") + "</b> " + totalValue + "</html>");
     lblTotalOrder.setFont(new Font("", Font.PLAIN, 12));
     lblTotalOrder.setForeground(Color.white);
     lblTotalOrder.setHorizontalAlignment(SwingConstants.LEFT);
 
-    JLabel lblQuantityProducts = new JLabel("<html><b>Productos</b> " + this.productsToChoose + "/" + order.getProduct().size() + "</html>");
+    JLabel lblQuantityProducts = new JLabel("<html><b>" + getString("storeorderdetailpage.products") + "</b> " + this.productsToChoose + "/" + order.getProduct().size() + "</html>");
     lblQuantityProducts.setFont(new Font("", Font.PLAIN, 12));
     lblQuantityProducts.setForeground(Color.white);
     lblQuantityProducts.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -205,14 +212,14 @@ public class StoreOrderDetailPage extends Page {
   }
 
   @Override
-  public JComponent buildFooter()  {
+  public JComponent buildFooter() {
 
     JPanel panel = new JPanel();
     panel.setLayout(new GridLayout(1, 0));
     panel.setBackground(Color.white);
 
-    JButton btnAdd = new JButton("Agregar producto");
-    btnAdd.setBackground(new Color(0, 123, 255));
+    JButton btnAdd = new JButton(getString("storeorderdetailpage.btn_add"));
+    btnAdd.setBackground(Constants.COLOR_BLUE);
     btnAdd.setForeground(Color.white);
 
     btnAdd.setBorderPainted(false);
@@ -223,12 +230,12 @@ public class StoreOrderDetailPage extends Page {
       btnAdd.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseEntered(MouseEvent e) {
-          btnAdd.setBackground(new Color(46, 135, 225));
+          btnAdd.setBackground(Constants.COLOR_BLUE_HOVER);
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-          btnAdd.setBackground(new Color(51, 153, 255));
+          btnAdd.setBackground(Constants.COLOR_BLUE);
         }
       });
     }
@@ -236,11 +243,8 @@ public class StoreOrderDetailPage extends Page {
     btnAdd.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("orderId", order.getId());
-
-        LocalStorage.saveData("orderId", order.getId());
-        Navigator.goToFrame("AddProductPage", params);
+        params.get("orderId");
+        goToFrame("AddProductPage", params);
       }
     });
 
@@ -252,8 +256,8 @@ public class StoreOrderDetailPage extends Page {
       @Override
       public void paint(Graphics grphcs, JComponent jc) {
         Graphics2D grphcs2D = (Graphics2D) grphcs.create();
-        grphcs2D.setColor(new Color(51, 153, 255));
-        grphcs2D.setBackground(new Color(51, 153, 255));
+        grphcs2D.setColor(Constants.COLOR_BLUE);
+        grphcs2D.setBackground(Constants.COLOR_BLUE);
         grphcs2D.dispose();
         super.paint(grphcs, jc);
       }
