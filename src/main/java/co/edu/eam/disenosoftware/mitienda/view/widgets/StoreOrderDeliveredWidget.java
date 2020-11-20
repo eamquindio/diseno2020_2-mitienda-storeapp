@@ -1,5 +1,6 @@
 package co.edu.eam.disenosoftware.mitienda.view.widgets;
 
+import co.edu.eam.disenosoftware.mitienda.config.Constants;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.view.lib.Widget;
 
@@ -30,7 +31,7 @@ public class StoreOrderDeliveredWidget extends Widget<Order> {
     JLabel lblOrderId = new JLabel();
 
 
-    this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+    this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Constants.COLOR_GRAY));
     this.setBackground(Color.white);
 
 

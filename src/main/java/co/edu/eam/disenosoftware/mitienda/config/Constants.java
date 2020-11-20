@@ -18,12 +18,12 @@ public class Constants {
   public static final String PRODUCT_IMAGE_NOT_FOUNDED_URL = "images/notfound.png";
 
   /**
-   * Official green
+   * official green
    */
   public static final Color COLOR_GREEN = new Color(122, 191, 181);
 
   /**
-   * Official green hover
+   * official green hover
    */
   public static final Color COLOR_GREEN_HOVER = new Color(103, 159, 152);
 
@@ -31,22 +31,25 @@ public class Constants {
    * Official red
    */
   public static final Color COLOR_RED = new Color(220, 53, 69);
-
-  /**
-   * Official red hover
-   */
-  public static final Color COLOR_RED_HOVER = new Color(185, 47, 61);
-
   /**
    * Official blue
    */
   public static final Color COLOR_BLUE = new Color(51, 153, 255);
 
   /**
+   * official gray
+   */
+  public static final Color COLOR_GRAY =new Color(204, 204, 204);
+
+  /**
+   * official red hover
+   */
+  public static final Color COLOR_RED_HOVER = new Color(185, 47, 61);
+
+  /**
    * Official blue hover
    */
   public static final Color COLOR_BLUE_HOVER = new Color(46, 135, 225);
-
 
   /**
    * Title Font

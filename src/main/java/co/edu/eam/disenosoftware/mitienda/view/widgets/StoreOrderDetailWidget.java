@@ -95,7 +95,7 @@ public class StoreOrderDetailWidget extends Widget<OrderProduct> {
       }
     });
 
-    JButton btnDelete = new JButton("Eliminar");
+    JButton btnDelete = new JButton(parentPage.getString("storeorderdetailwidget.btn_delete"));
     btnDelete.setFont(new Font("", Font.BOLD, 12));
     btnDelete.setForeground(Color.white);
     btnDelete.setBackground(Constants.COLOR_RED);
