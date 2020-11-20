@@ -148,29 +148,31 @@ public class StoreOrderPage extends Page {
 
         List<Order> orders = order;
 
-        panelGrid.setLayout(new java.awt.GridLayout(orders.size(), 0, 0, 5));
-        panelGridPreparados.setLayout(new java.awt.GridLayout(orders.size(), 0, 0, 5));
-        panelGridEntregados.setLayout(new java.awt.GridLayout(orders.size(), 0, 0, 5));
+        if (!(orders.size() == 0)) {
+            panelGrid.setLayout(new java.awt.GridLayout(orders.size(), 0, 0, 5));
+            panelGridPreparados.setLayout(new java.awt.GridLayout(orders.size(), 0, 0, 5));
+            panelGridEntregados.setLayout(new java.awt.GridLayout(orders.size(), 0, 0, 5));
 
-        for (int i = 0; i < orders.size(); i++) {
+            for (int i = 0; i < orders.size(); i++) {
 
-            if (order.get(i).getState().equals("created")) {
+                if (order.get(i).getState().equals("created")) {
 
-                StoreOrderInProgressWidget storeOrderInProgressWidget = new StoreOrderInProgressWidget(order.get(i), this);
-                panelGrid.add(storeOrderInProgressWidget);
+                    StoreOrderInProgressWidget storeOrderInProgressWidget = new StoreOrderInProgressWidget(order.get(i), this);
+                    panelGrid.add(storeOrderInProgressWidget);
+                }
+                if (order.get(i).getState().equals("finished")) {
+
+                    StoreOrderPreparedWidget storeOrderPreparedWidget = new StoreOrderPreparedWidget(order.get(i), this);
+                    panelGridPreparados.add(storeOrderPreparedWidget);
+
+                }
+                if (order.get(i).getState().equals("delivered")) {
+
+                    StoreOrderDeliveredWidget storeOrderDeliveredWidget = new StoreOrderDeliveredWidget(order.get(i));
+                    panelGridEntregados.add(storeOrderDeliveredWidget);
+                }
+
             }
-            if (order.get(i).getState().equals("finished")) {
-
-                StoreOrderPreparedWidget storeOrderPreparedWidget = new StoreOrderPreparedWidget(order.get(i), this);
-                panelGridPreparados.add(storeOrderPreparedWidget);
-
-            }
-            if (order.get(i).getState().equals("delivered")) {
-
-                StoreOrderDeliveredWidget storeOrderDeliveredWidget = new StoreOrderDeliveredWidget(order.get(i));
-                panelGridEntregados.add(storeOrderDeliveredWidget);
-            }
-
         }
 
         return tbdContainer;
