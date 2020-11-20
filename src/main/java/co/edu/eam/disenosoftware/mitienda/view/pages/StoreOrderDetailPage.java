@@ -243,7 +243,7 @@ public class StoreOrderDetailPage extends Page {
     btnAdd.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        params.get("orderId");
+        params.put("orderId",(Long) getParam("orderId"));
         goToFrame("AddProductPage", params);
       }
     });
