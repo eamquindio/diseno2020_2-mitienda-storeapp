@@ -43,7 +43,7 @@ public class AddProductsDetailWidget extends Widget<Product> {
         Map<String, Object> params = new HashMap<>();
         params.put("product", data);
         params.put("orderId", (Long)parentPage.getParam("orderId"));
-        Navigator.goToFrame("DialogAddProductPage",params);
+        parentPage.goToFrame("DialogAddProductPage",params);
       }
     });
     panelInfo.setBackground(Color.white);
